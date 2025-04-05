@@ -1,5 +1,43 @@
 # Chapter 3: Data Mesh - A Modern Paradigm for Airlines
 
+## The Decentralized Data Architecture
+
+Data Mesh represents a fundamental paradigm shift from traditional centralized data architectures toward a **decentralized, domain-oriented** approach. While Data Fabric focuses on connecting distributed data through centralized governance, Data Mesh emphasizes distributed ownership and autonomy.
+
+### Core Principles of Decentralization in Data Mesh
+
+- **Domain Ownership**: Business domains take full responsibility for their data products, including design, implementation, quality, and maintenance, rather than relying on a central team.
+
+- **Distributed Decision-Making**: Authority over data architecture decisions is pushed to domain teams who have the most context about their specific business needs.
+
+- **Autonomous Implementation**: Each domain has the freedom to choose technologies and implementation details that best serve their specific use cases, as long as they adhere to shared principles.
+
+- **Local Governance with Global Oversight**: Domains establish their own governance processes while adhering to organization-wide principles and standards.
+
+- **Federated Computational Governance**: Instead of centralized governance enforcement, governance becomes a distributed responsibility with automated, code-based policies.
+
+```mermaid
+graph TB
+    subgraph "Centralized (Data Fabric)"
+        A1[Central Data Team] --> B1[Central Data Platform]
+        B1 --> C1[Domain 1]
+        B1 --> D1[Domain 2]
+        B1 --> E1[Domain 3]
+    end
+    
+    subgraph "Decentralized (Data Mesh)"
+        A2[Shared Platform] --- B2[Domain 1 Team]
+        A2 --- C2[Domain 2 Team]
+        A2 --- D2[Domain 3 Team]
+        B2 --> E2[Domain 1 Products]
+        C2 --> F2[Domain 2 Products]
+        D2 --> G2[Domain 3 Products]
+    end
+    
+    style A1 fill:#f5f5f5,stroke:#333,stroke-width:2px
+    style A2 fill:#e6f3ff,stroke:#333,stroke-width:2px
+```
+
 ## Data Mesh in Aviation Context
 
 GlobalAir's transformation to Data Mesh architecture represents a fundamental shift in how airline data is managed, owned, and utilized. This chapter explores how Data Mesh principles are implemented across various airline domains while leveraging multi-cloud capabilities.

@@ -3,6 +3,22 @@
 ## Fundamentals of Data Fabric
 Data Fabric represents a modern architectural approach that simplifies and integrates data management across cloud, multi-cloud, and on-premises environments. This chapter explores its core components and implementation strategies.
 
+### Centralized Governance in Data Fabric
+
+Data Fabric architectures typically employ a **centralized governance model** that provides consistent control and management across distributed data assets. This centralization is a defining characteristic that differentiates data fabric from newer paradigms like data mesh.
+
+#### Key Aspects of Centralization in Data Fabric:
+
+- **Unified Control Plane**: A central mechanism for implementing policies, access controls, and governance rules across all data sources, regardless of their physical location.
+
+- **Centralized Metadata Repository**: A consolidated catalog that maintains information about all enterprise data assets, enabling comprehensive search, lineage tracking, and governance.
+
+- **Standardized Data Management**: Consistent processes for data quality, master data management, and data lifecycle management applied universally across the organization.
+
+- **Enterprise-Wide Data Services**: Core capabilities like data integration, cataloging, quality management, and security provided as centrally managed services.
+
+- **Consolidated Technical Teams**: Data engineering and platform teams that maintain the entire fabric infrastructure, implementing changes and managing the environment for all business units.
+
 ### Core Components of Data Fabric
 
 #### 1. Data Integration Layer
