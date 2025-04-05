@@ -1,4 +1,9 @@
-# Chapter 6: Integration Patterns for Airline Operations
+# Chapter 6: Data Integration Patterns
+
+## Introduction to Enterprise Data Integration
+Effective data integration is a cornerstone of successful enterprise data architecture. This chapter explores advanced patterns and strategies for connecting disparate data systems across cloud and on-premises environments.
+
+![Data Integration Architecture](../../data_integration_architecture.png)
 
 ## Multi-Cloud Integration Architecture
 

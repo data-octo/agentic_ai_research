@@ -3,6 +3,8 @@
 ## Fundamentals of Data Fabric
 Data Fabric represents a modern architectural approach that simplifies and integrates data management across cloud, multi-cloud, and on-premises environments. This chapter explores its core components and implementation strategies.
 
+![Data Fabric Architecture](../../data_fabric_architecture.png)
+
 ### Centralized Governance in Data Fabric
 
 Data Fabric architectures typically employ a **centralized governance model** that provides consistent control and management across distributed data assets. This centralization is a defining characteristic that differentiates data fabric from newer paradigms like data mesh.

@@ -1,3 +1,10 @@
+# Chapter 7: Data Transformation Architecture
+
+## Introduction to Modern Data Transformation
+Data transformation is a critical component in enterprise data architecture, enabling organizations to convert raw data into actionable insights. This chapter explores advanced patterns and technologies for efficient, scalable data transformation.
+
+![Data Transformation Architecture](../../data_transformation_architecture.png)
+
 # Chapter 7: Digital Transformation Journey
 
 ## From Legacy to Modern Architecture

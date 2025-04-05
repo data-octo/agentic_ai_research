@@ -1,4 +1,9 @@
-# Chapter 4: Domain-Driven Data Architecture
+# Chapter 4: Domain-Driven Design for Data Architecture
+
+## Introduction to Domain-Driven Design
+Domain-Driven Design (DDD) provides a framework for modeling complex systems that aligns technical implementation with business domains. This chapter explores how DDD principles can be applied to enterprise data architectures.
+
+![Domain-Driven Design](../../domain_driven_design.png)
 
 ## Domain-Driven Design in Aviation
 

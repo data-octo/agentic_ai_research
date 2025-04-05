@@ -1,3 +1,10 @@
+# Chapter 3: Data Mesh Architecture
+
+## Understanding Data Mesh
+Data Mesh is a paradigm shift in how enterprises manage and approach data. Unlike traditional centralized architectures, it adopts a domain-oriented, distributed approach to data ownership and architecture.
+
+![Data Mesh Architecture](../../data_mesh_architecture.png)
+
 # Chapter 3: Data Mesh - A Modern Paradigm for Airlines
 
 ## The Decentralized Data Architecture
