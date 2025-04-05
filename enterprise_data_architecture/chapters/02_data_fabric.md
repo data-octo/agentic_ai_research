@@ -90,6 +90,22 @@ Data Fabric architectures typically employ a **centralized governance model** th
   - Cache systems enhance performance by storing frequently accessed data locally.
   - Archive storage ensures long-term preservation of data, meeting compliance and historical analysis needs.
 
+- **Data Lakehouse Architecture**
+  - Hybrid storage approach combines the flexibility of data lakes with the performance and reliability of data warehouses.
+  - ACID transaction support ensures data consistency and integrity, addressing a key limitation of traditional data lakes.
+  - Schema enforcement and evolution capabilities provide structure while maintaining flexibility, supporting diverse use cases.
+  - Metadata layer enables efficient querying and management of both structured and unstructured data.
+  - Direct analytics on source data eliminates the need for data duplication, reducing storage costs and synchronization efforts.
+  - Decoupled storage and compute allows independent scaling of resources, optimizing cost and performance.
+  - Open table formats (Delta Lake, Iceberg, Hudi) enable interoperability across tools and platforms.
+
+  **Technology Recommendations:**
+  - **Databricks Lakehouse Platform**: Offers comprehensive lakehouse capabilities with Delta Lake, integrates with both AWS and Azure.
+  - **Amazon Redshift Spectrum**: Extends Redshift data warehouse to query data in S3 data lakes.
+  - **Snowflake**: Provides cloud data platform with seamless data lake integration and powerful compute separation.
+  - **Azure Synapse Analytics**: Unifies data warehouse and big data analytics with lake database capabilities.
+  - **Google BigLake**: Creates unified storage engine across Google Cloud Storage, BigQuery, and open-source formats.
+
 #### 2. Data Services
 - **Core Services**
   - Data virtualization creates a unified view of data across sources, simplifying access and analysis.
