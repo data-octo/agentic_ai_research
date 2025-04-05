@@ -1,13 +1,72 @@
 #!/usr/bin/env python3
 import os
 import re
-import markdown
 import frontmatter
+import datetime
+import sys
+import subprocess
+import tempfile
+import uuid
+import base64
+import ctypes.util
+from pathlib import Path
+from jinja2 import Environment, FileSystemLoader
+
+# Set environment variables to help locate the system libraries
+# This is especially important for macOS Homebrew installations
+if sys.platform == "darwin":  # macOS
+    # Get Homebrew prefix
+    try:
+        homebrew_prefix = subprocess.check_output(['brew', '--prefix'], text=True).strip()
+        # Set environment variables to help find libraries
+        os.environ['DYLD_LIBRARY_PATH'] = f"{homebrew_prefix}/lib:{os.environ.get('DYLD_LIBRARY_PATH', '')}"
+        os.environ['PKG_CONFIG_PATH'] = f"{homebrew_prefix}/lib/pkgconfig:{os.environ.get('PKG_CONFIG_PATH', '')}"
+        os.environ['LIBRARY_PATH'] = f"{homebrew_prefix}/lib:{os.environ.get('LIBRARY_PATH', '')}"
+        os.environ['CPATH'] = f"{homebrew_prefix}/include:{os.environ.get('CPATH', '')}"
+        
+        # Add a custom finder for the pango library
+        original_find_library = ctypes.util.find_library
+        
+        def custom_find_library(name):
+            if name == 'pango-1.0-0':
+                # For macOS, Homebrew installs pango as 'libpango-1.0.dylib'
+                pango_path = f"{homebrew_prefix}/lib/libpango-1.0.dylib"
+                if os.path.exists(pango_path):
+                    return pango_path
+                # Try alternative names as well
+                alternatives = [
+                    f"{homebrew_prefix}/lib/libpango-1.0.0.dylib",
+                    f"{homebrew_prefix}/opt/pango/lib/libpango-1.0.dylib"
+                ]
+                for alt in alternatives:
+                    if os.path.exists(alt):
+                        return alt
+            return original_find_library(name)
+        
+        # Replace the find_library function with our custom one
+        ctypes.util.find_library = custom_find_library
+        
+        print(f"Configured library paths for macOS using Homebrew prefix: {homebrew_prefix}")
+    except (subprocess.SubprocessError, FileNotFoundError):
+        print("Homebrew not found, using default library paths.")
+
+# Try to import WeasyPrint but handle if it's not available
+PDF_SUPPORT = False
+try:
+    from weasyprint import HTML, CSS
+    PDF_SUPPORT = True
+    print("WeasyPrint successfully imported!")
+except (ImportError, OSError) as e:
+    print("\n-----")
+    print("WeasyPrint could not be imported. PDF generation will be disabled.")
+    print("Error details:", str(e))
+    print("For installation instructions, visit:")
+    print("https://doc.courtbouillon.org/weasyprint/stable/first_steps.html")
+    print("-----\n")
+
+import markdown
 from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
-from jinja2 import Environment, FileSystemLoader
-from weasyprint import HTML, CSS
-from pathlib import Path
 
 class MermaidPreprocessor(Preprocessor):
     def run(self, lines):
@@ -44,6 +103,9 @@ class BookConverter:
         self.html_dir = os.path.join(self.output_dir, "html")
         self.templates_dir = os.path.join(book_dir, "templates")
         
+        # Generate timestamp for filenames
+        self.timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+        
         # Create output directories
         os.makedirs(self.output_dir, exist_ok=True)
         os.makedirs(self.html_dir, exist_ok=True)
@@ -78,6 +140,9 @@ class BookConverter:
                         self.book_title = "Enterprise Data Architecture Guide"
         else:
             self.book_title = "Enterprise Data Architecture Guide"
+        
+        print(f"Book: {self.book_title}")
+        print(f"Timestamp: {self.timestamp}")
 
     def create_templates(self):
         """Create template files if they don't exist"""
@@ -257,10 +322,10 @@ class BookConverter:
         # Combine all HTML content
         full_html = readme_html + "\n".join(chapter_contents)
         
-        # Generate filenames with book title
+        # Generate filenames with book title and timestamp
         safe_title = self.book_title.lower().replace(' ', '_').replace(':', '').replace('-', '_')
-        html_output = os.path.join(self.html_dir, f"{safe_title}.html")
-        pdf_output = os.path.join(self.output_dir, f"{safe_title}.pdf")
+        html_output = os.path.join(self.html_dir, f"{safe_title}_{self.timestamp}.html")
+        pdf_output = os.path.join(self.output_dir, f"{safe_title}_{self.timestamp}.pdf")
         
         # Save combined HTML
         with open(html_output, "w") as f:
@@ -268,8 +333,11 @@ class BookConverter:
         print(f"Generated HTML version: {html_output}")
         
         # Generate PDF
-        HTML(string=full_html).write_pdf(pdf_output)
-        print(f"Generated PDF version: {pdf_output}")
+        if PDF_SUPPORT:
+            HTML(string=full_html).write_pdf(pdf_output)
+            print(f"Generated PDF version: {pdf_output}")
+        else:
+            print("PDF generation skipped due to missing WeasyPrint.")
         
         print("Book conversion completed successfully!")
 

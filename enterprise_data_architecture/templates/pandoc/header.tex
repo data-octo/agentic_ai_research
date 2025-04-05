@@ -1,0 +1,49 @@
+
+\documentclass[11pt,a4paper,oneside]{book}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\geometry{
+    a4paper,
+    total={160mm,240mm},
+    left=25mm,
+    right=25mm,
+    top=25mm,
+    bottom=25mm,
+}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=blue,
+    citecolor=blue,
+}
+
+\setitemize{itemsep=0.5em}
+\setenumerate{itemsep=0.5em}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+\titleformat{\chapter}{\LARGE\bfseries}{\thechapter. }{0pt}{}
+\titleformat{\section}{\Large\bfseries}{\thesection }{0pt}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection }{0pt}{}
+
+\begin{document}
+
+\title{$title$}
+\author{}
+\date{\today}
+\maketitle
+\tableofcontents
+\newpage

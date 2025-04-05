@@ -1,0 +1,38 @@
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    color: #2c3e50;
+    background-color: #ffffff;
+}
+
+/* ...existing CSS... */
+
+/* Enhanced Mermaid diagram styling */
+.mermaid {
+    background-color: white;
+    padding: 1em;
+    border-radius: 5px;
+    margin: 2em auto;
+    text-align: center;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.mermaid svg {
+    max-width: 100%;
+    height: auto !important;
+}
+
+/* Add styles for PDF-embedded images (for mermaid) */
+.diagram-image {
+    display: block;
+    margin: 2em auto;
+    max-width: 100%;
+    text-align: center;
+}
+
+/* ...rest of existing CSS... */
