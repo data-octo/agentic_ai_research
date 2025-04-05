@@ -30,6 +30,21 @@ graph TB
         B1 --> C1[Domain 1]
         B1 --> D1[Domain 2]
         B1 --> E1[Domain 3]
+        
+        %% New Analytics Layer
+        B1 --> F1[Analytics Layer]
+        
+        subgraph "Central Analytics"
+            G1[Reporting]
+            H1[Dashboards]
+            I1[Data Science]
+            J1[Forecasting]
+        end
+        
+        F1 --- G1
+        F1 --- H1
+        F1 --- I1
+        F1 --- J1
     end
     
     subgraph "Decentralized (Data Mesh)"
@@ -39,10 +54,31 @@ graph TB
         B2 --> E2[Domain 1 Products]
         C2 --> F2[Domain 2 Products]
         D2 --> G2[Domain 3 Products]
+        
+        %% New Analytics Layers per domain
+        E2 --> H2[Domain 1 Analytics]
+        F2 --> I2[Domain 2 Analytics]
+        G2 --> J2[Domain 3 Analytics]
+        
+        subgraph "Federated Analytics"
+            K2[Domain-specific Reporting]
+            L2[Custom Dashboards]
+            M2[Specialized Data Science]
+            N2[Domain Forecasting]
+        end
+        
+        H2 --- K2
+        I2 --- L2
+        J2 --- M2
+        J2 --- N2
     end
     
     style A1 fill:#f5f5f5,stroke:#333,stroke-width:2px
     style A2 fill:#e6f3ff,stroke:#333,stroke-width:2px
+    style F1 fill:#ffcccb,stroke:#333,stroke-width:2px
+    style H2 fill:#90ee90,stroke:#333,stroke-width:2px
+    style I2 fill:#90ee90,stroke:#333,stroke-width:2px
+    style J2 fill:#90ee90,stroke:#333,stroke-width:2px
 ```
 
 ## Data Mesh in Aviation Context
@@ -56,6 +92,9 @@ graph TB
         B --> C[Self-Serve Platform]
         C --> D[Federated Governance]
         
+        %% Add Analytics layer
+        D --> I[Analytics Layer]
+        
         subgraph "Business Domains"
             E[Flight Operations]
             F[Customer Experience]
@@ -63,16 +102,29 @@ graph TB
             H[Aircraft Maintenance]
         end
         
+        subgraph "Analytics Capabilities"
+            J[Domain Reporting]
+            K[Interactive Dashboards]
+            L[Data Science Models]
+            M[Forecasting Services]
+        end
+        
         D --- E
         D --- F
         D --- G
         D --- H
+        
+        I --- J
+        I --- K
+        I --- L
+        I --- M
     end
     
     style A fill:#f5f5f5,stroke:#333,stroke-width:2px
     style B fill:#e6f3ff,stroke:#333,stroke-width:2px
     style C fill:#ffe6e6,stroke:#333,stroke-width:2px
     style D fill:#e6ffe6,stroke:#333,stroke-width:2px
+    style I fill:#ffd700,stroke:#333,stroke-width:2px
 ```
 
 ## Domain-Oriented Architecture
@@ -94,15 +146,30 @@ graph TB
           C --> D[DynamoDB]
           D --> E[API Gateway]
           
+          %% Add Analytics Layer
+          E --> I[Analytics Layer]
+          
           subgraph "Data Products"
               F[Flight Tracker]
               G[Crew Portal]
               H[Weather Service]
           end
           
+          subgraph "Analytics Capabilities"
+              J[Operational Reporting]
+              K[Real-time Dashboards]
+              L[Predictive Models]
+              M[Operational Forecasts]
+          end
+          
           E --- F
           E --- G
           E --- H
+          
+          I --- J
+          I --- K
+          I --- L
+          I --- M
       end
       
       style A fill:#f5f5f5
@@ -110,6 +177,7 @@ graph TB
       style C fill:#ff9900
       style D fill:#ff9900
       style E fill:#ff9900
+      style I fill:#90ee90
   ```
 
   - Event sources like IoT sensors and operational systems feed real-time data into AWS Kinesis for processing.
@@ -134,15 +202,30 @@ graph TB
           C --> D[Cosmos DB]
           D --> E[API Management]
           
+          %% Add Analytics Layer
+          E --> I[Analytics Layer]
+          
           subgraph "Data Products"
               F[Booking Engine]
               G[Loyalty Platform]
               H[Customer Profile]
           end
           
+          subgraph "Analytics Capabilities"
+              J[Customer Reporting]
+              K[Experience Dashboards]
+              L[Segmentation Models]
+              M[Behavior Forecasting]
+          end
+          
           E --- F
           E --- G
           E --- H
+          
+          I --- J
+          I --- K
+          I --- L
+          I --- M
       end
       
       style A fill:#f5f5f5
@@ -150,6 +233,7 @@ graph TB
       style C fill:#0078d4
       style D fill:#0078d4
       style E fill:#0078d4
+      style I fill:#90ee90
   ```
 
   - Customer events, such as bookings and feedback, are ingested through Azure Event Hubs for processing.
@@ -183,6 +267,9 @@ graph LR
         B --> C[API Gateway]
         C --> D[Development Portal]
         
+        %% Add Analytics Layer
+        D --> I[Analytics Services]
+        
         subgraph "Developer Tools"
             E[SDK/CLI]
             F[Documentation]
@@ -190,16 +277,29 @@ graph LR
             H[Monitoring]
         end
         
+        subgraph "Analytics Capabilities"
+            J[Reporting Tools]
+            K[Dashboard Builder]
+            L[Data Science Workbench]
+            M[Forecasting Framework]
+        end
+        
         D --- E
         D --- F
         D --- G
         D --- H
+        
+        I --- J
+        I --- K
+        I --- L
+        I --- M
     end
     
     style A fill:#f5f5f5
     style B fill:#e6f3ff
     style C fill:#ffe6e6
     style D fill:#e6ffe6
+    style I fill:#ffd700
 ```
 
 - **Domain Registry:** Centralizes metadata about data products, making it easier for teams to discover and use them.

@@ -16,6 +16,9 @@ graph TB
         B --> C[Context Maps]
         C --> D[Domain Models]
         
+        %% Add Analytics Layer
+        D --> I[Analytics Layer]
+        
         subgraph "Airline Domains"
             E[Flight Operations]
             F[Revenue Management]
@@ -23,16 +26,29 @@ graph TB
             H[Aircraft Maintenance]
         end
         
+        subgraph "Analytics Capabilities"
+            J[Domain Reporting]
+            K[Business Dashboards]
+            L[Data Science Models]
+            M[Predictive Forecasting]
+        end
+        
         D --- E
         D --- F
         D --- G
         D --- H
+        
+        I --- J
+        I --- K
+        I --- L
+        I --- M
     end
     
     style A fill:#f5f5f5,stroke:#333,stroke-width:2px
     style B fill:#e6f3ff,stroke:#333,stroke-width:2px
     style C fill:#ffe6e6,stroke:#333,stroke-width:2px
     style D fill:#e6ffe6,stroke:#333,stroke-width:2px
+    style I fill:#ffd700,stroke:#333,stroke-width:2px
 ```
 
 ## Core Domain Analysis

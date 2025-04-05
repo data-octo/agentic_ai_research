@@ -102,6 +102,8 @@ class BookConverter:
         self.output_dir = os.path.join(book_dir, "output")
         self.html_dir = os.path.join(self.output_dir, "html")
         self.templates_dir = os.path.join(book_dir, "templates")
+        self.diagrams_dir = os.path.join(book_dir, "diagrams")
+        self.root_dir = os.path.dirname(os.path.join(os.getcwd(), book_dir))
         
         # Generate timestamp for filenames
         self.timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -268,8 +270,14 @@ class BookConverter:
                 f.write(base_template)
 
     def convert_markdown_to_html(self, content):
-        """Convert markdown content to HTML"""
-        return self.md.convert(content)
+        """Convert markdown content to HTML and fix image paths"""
+        # Fix image references pointing to parent directory (../../image.png)
+        content = re.sub(r'!\[(.*?)\]\(\.\./\.\.(.*?\.png)\)', r'![\1](\2)', content)
+        
+        # Process the markdown content
+        html_content = self.md.convert(content)
+        
+        return html_content
 
     def process_single_file(self, file_path):
         """Process a single markdown file"""
@@ -293,7 +301,7 @@ class BookConverter:
         return rendered_html
 
     def process_book(self):
-        """Process all markdown files and generate HTML and PDF"""
+        """Process all markdown files and generate HTML output"""
         print("Starting book conversion process...")
         
         # First, create necessary templates
@@ -322,22 +330,38 @@ class BookConverter:
         # Combine all HTML content
         full_html = readme_html + "\n".join(chapter_contents)
         
+        # Create output directories for the diagrams
+        diagrams_output_dir = os.path.join(self.html_dir, 'images')
+        os.makedirs(diagrams_output_dir, exist_ok=True)
+        
+        # Copy PNG diagram files to the HTML output directory
+        print("Copying diagram images...")
+        root_png_files = [f for f in os.listdir(self.root_dir) if f.endswith('.png')]
+        for png_file in root_png_files:
+            source_path = os.path.join(self.root_dir, png_file)
+            dest_path = os.path.join(diagrams_output_dir, png_file)
+            try:
+                import shutil
+                shutil.copy2(source_path, dest_path)
+                print(f"  Copied {png_file} to {diagrams_output_dir}")
+            except Exception as e:
+                print(f"  Error copying {png_file}: {str(e)}")
+        
+        # Fix image references in HTML to point to the correct location
+        # This specifically targets <img> tags with the PNG file in the src attribute
+        for png_file in root_png_files:
+            pattern = f'<img\\s+[^>]*src="{png_file}"[^>]*>'
+            replacement = f'<img src="images/{png_file}" alt="{png_file.replace(".png", "")}">'
+            full_html = re.sub(pattern, replacement, full_html)
+        
         # Generate filenames with book title and timestamp
         safe_title = self.book_title.lower().replace(' ', '_').replace(':', '').replace('-', '_')
         html_output = os.path.join(self.html_dir, f"{safe_title}_{self.timestamp}.html")
-        pdf_output = os.path.join(self.output_dir, f"{safe_title}_{self.timestamp}.pdf")
         
         # Save combined HTML
         with open(html_output, "w") as f:
             f.write(full_html)
         print(f"Generated HTML version: {html_output}")
-        
-        # Generate PDF
-        if PDF_SUPPORT:
-            HTML(string=full_html).write_pdf(pdf_output)
-            print(f"Generated PDF version: {pdf_output}")
-        else:
-            print("PDF generation skipped due to missing WeasyPrint.")
         
         print("Book conversion completed successfully!")
 
