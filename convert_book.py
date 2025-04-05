@@ -96,25 +96,25 @@ class MermaidExtension(Extension):
         md.preprocessors.register(MermaidPreprocessor(md), 'mermaid', 175)
 
 class BookConverter:
-    def __init__(self, book_dir="enterprise_data_architecture"):
+    def __init__(self, book_dir):
         self.book_dir = book_dir
-        self.chapters_dir = os.path.join(book_dir, "chapters")
+        self.chapters_dir = os.path.join(book_dir)
         self.output_dir = os.path.join(book_dir, "output")
         self.html_dir = os.path.join(self.output_dir, "html")
         self.templates_dir = os.path.join(book_dir, "templates")
         self.diagrams_dir = os.path.join(book_dir, "diagrams")
         self.root_dir = os.path.dirname(os.path.join(os.getcwd(), book_dir))
-        
+
         # Generate timestamp for filenames
         self.timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-        
+
         # Create output directories
         os.makedirs(self.output_dir, exist_ok=True)
         os.makedirs(self.html_dir, exist_ok=True)
-        
+
         # Initialize Jinja2 environment
         self.env = Environment(loader=FileSystemLoader(self.templates_dir))
-        
+
         # Initialize Markdown converter with extensions
         self.md = markdown.Markdown(extensions=[
             'meta',
@@ -125,24 +125,9 @@ class BookConverter:
             'attr_list'
         ])
 
-        # Get book title from README.md
-        readme_path = os.path.join(book_dir, "README.md")
-        if os.path.exists(readme_path):
-            with open(readme_path, 'r') as f:
-                content = f.read()
-                post = frontmatter.loads(content)
-                # Try to find the title in the first h1 heading if not in frontmatter
-                if hasattr(post, 'title'):
-                    self.book_title = post.title
-                else:
-                    h1_match = re.search(r'#\s+(.+)$', content, re.MULTILINE)
-                    if h1_match:
-                        self.book_title = h1_match.group(1).strip()
-                    else:
-                        self.book_title = "Enterprise Data Architecture Guide"
-        else:
-            self.book_title = "Enterprise Data Architecture Guide"
-        
+        # Use folder name as book title
+        self.book_title = os.path.basename(book_dir).replace('_', ' ').title()
+
         print(f"Book: {self.book_title}")
         print(f"Timestamp: {self.timestamp}")
 
@@ -308,27 +293,17 @@ class BookConverter:
         self.create_templates()
         print("Created templates...")
         
-        # Read README.md first
-        readme_path = os.path.join(self.book_dir, "README.md")
-        readme_html = ""
-        if os.path.exists(readme_path):
-            readme_html = self.process_single_file(readme_path)
-            print("Processed README.md...")
-        
         # Process all chapter files in order
         chapter_contents = []
-        for i in range(1, 11):
-            chapter_file = f"{i:02d}_"
-            chapter_files = [f for f in os.listdir(self.chapters_dir) if f.startswith(chapter_file)]
-            
-            if chapter_files:
-                file_path = os.path.join(self.chapters_dir, chapter_files[0])
+        for file_name in sorted(os.listdir(self.chapters_dir)):
+            if file_name.endswith(".md"):
+                file_path = os.path.join(self.chapters_dir, file_name)
                 chapter_html = self.process_single_file(file_path)
                 chapter_contents.append(chapter_html)
-                print(f"Processed chapter {i}...")
+                print(f"Processed {file_name}...")
         
         # Combine all HTML content
-        full_html = readme_html + "\n".join(chapter_contents)
+        full_html = "\n".join(chapter_contents)
         
         # Create output directories for the diagrams
         diagrams_output_dir = os.path.join(self.html_dir, 'images')
@@ -354,9 +329,9 @@ class BookConverter:
             replacement = f'<img src="images/{png_file}" alt="{png_file.replace(".png", "")}">'
             full_html = re.sub(pattern, replacement, full_html)
         
-        # Generate filenames with book title and timestamp
-        safe_title = self.book_title.lower().replace(' ', '_').replace(':', '').replace('-', '_')
-        html_output = os.path.join(self.html_dir, f"{safe_title}_{self.timestamp}.html")
+        # Generate filenames with folder name
+        safe_title = os.path.basename(self.book_dir).lower().replace(' ', '_').replace(':', '').replace('-', '_')
+        html_output = os.path.join(self.html_dir, f"{safe_title}.html")
         
         # Save combined HTML
         with open(html_output, "w") as f:
@@ -366,5 +341,5 @@ class BookConverter:
         print("Book conversion completed successfully!")
 
 if __name__ == "__main__":
-    converter = BookConverter()
+    converter = BookConverter("enterprise_data_architecture")
     converter.process_book()
