@@ -525,6 +525,130 @@ graph TB
   - **Product MDM:** Managing service offerings, fare classes, and ancillary products consistently across sales channels.
   - **Supplier MDM:** Maintaining accurate vendor information for procurement, maintenance, and financial systems.
 
+### 5. Balancing Centralized Governance and Decentralized Implementation
+
+- **The Governance Paradox:**
+  - Organizations need both standardization for consistency and autonomy for innovation.
+  - Centralized governance ensures enterprise-wide compliance while decentralized implementation enables domain-specific optimization.
+  - This balanced approach empowers domain teams while maintaining organizational cohesion.
+
+- **Federated Governance Model:**
+  - **Central Governance Body:**
+    - Establishes enterprise-wide policies, standards, and reference data
+    - Defines minimum quality thresholds and compliance requirements
+    - Provides governance tools, frameworks, and methodologies
+    - Measures and reports on cross-domain governance metrics
+  
+  - **Domain-Specific Implementation:**
+    - Applies central standards within domain-specific contexts
+    - Implements quality controls tailored to domain data characteristics
+    - Contributes domain expertise to enterprise standards evolution
+    - Manages day-to-day governance operations within the domain
+
+```mermaid
+graph TB
+    subgraph "Federated Governance"
+        A[Central Governance] --> B[Enterprise Standards]
+        A --> C[Core Policies]
+        A --> D[Reference Architecture]
+        
+        E[Domain Teams] --> F[Implementation]
+        E --> G[Local Standards]
+        E --> H[Quality Controls]
+        
+        B --> F
+        C --> F
+        D --> G
+        F --> I[Feedback Loop]
+        I --> A
+    end
+```
+
+- **Operational vs. Analytical Data Governance:**
+
+  - **Operational Data Governance:**
+    - **Focus Areas:**
+      - Transaction integrity and data consistency
+      - Real-time quality validation
+      - System-of-record determination
+      - Data synchronization across operational systems
+    
+    - **Key Metrics:**
+      - Transaction error rates
+      - System availability and response times
+      - Data synchronization latency
+      - Business process completion rates
+    
+    - **Implementation Approach:**
+      - Embed quality controls within business processes
+      - Implement real-time validation rules
+      - Establish clear data ownership per transaction type
+      - Define automated remediation workflows for exceptions
+
+  - **Analytical Data Governance:**
+    - **Focus Areas:**
+      - Data trustworthiness and fitness-for-purpose
+      - Historical accuracy and consistency
+      - Metadata completeness and documentation
+      - Analytical model governance and versioning
+    
+    - **Key Metrics:**
+      - Data quality dimensions (completeness, accuracy, consistency)
+      - Data catalog coverage and usage
+      - Business glossary adoption rates
+      - Self-service analytics compliance scores
+    
+    - **Implementation Approach:**
+      - Develop comprehensive data quality frameworks
+      - Implement fitness-for-purpose quality metrics
+      - Create domain-specific data quality rules
+      - Establish analytical model governance processes
+
+- **Implementation Best Practices:**
+
+  - **Organizational Structure:**
+    - Establish a central Data Governance Office (DGO) for enterprise standards
+    - Designate domain data owners with clear accountability
+    - Create cross-functional governance councils with both central and domain representatives
+    - Implement a tiered decision-making framework (enterprise, domain, team)
+
+  - **Technology Enablers:**
+    - Automated policy enforcement through data quality tools
+    - Self-service governance dashboards for domain teams
+    - Centralized metadata repository with federated contribution model
+    - Integrated workflow for governance processes across domains
+
+  - **Process Integration:**
+    - Embed governance checks into CI/CD pipelines for data products
+    - Integrate quality gates into data engineering workflows
+    - Implement automated compliance reporting with domain-specific views
+    - Create governance feedback loops between central and domain teams
+
+- **Managing the Transition:**
+  - Start with high-value, high-risk domains to demonstrate impact
+  - Incrementally expand governance coverage across domains
+  - Balance prescriptive controls for critical data with guidance for non-critical data
+  - Regularly review and adjust the central-local balance based on outcomes
+
+- **Aviation Industry Example:**
+  - **Central Governance:**
+    - Enterprise-wide passenger data privacy standards
+    - Flight safety reporting requirements
+    - Regulatory compliance frameworks
+    - Corporate data security policies
+
+  - **Domain Implementation:**
+    - Customer Experience domain: Passenger profile quality rules tailored to loyalty program needs
+    - Flight Operations domain: Flight data quality standards optimized for operational efficiency
+    - Maintenance domain: Equipment data governance adapted to specific aircraft types
+    - Finance domain: Revenue data quality controls aligned with accounting standards
+
+- **Measuring Success:**
+  - Balance scorecard measuring both governance compliance and domain innovation
+  - Regular assessment of governance overhead vs. business value
+  - Feedback mechanisms to identify areas of over/under governance
+  - Executive-level reporting on governance effectiveness across domains
+
 ## Performance Optimization
 
 ### 1. Performance Framework

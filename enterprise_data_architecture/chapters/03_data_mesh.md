@@ -394,6 +394,231 @@ graph TB
 4. Federated governance balances control.
 5. Cross-domain integration drives value.
 
+## Hybrid Architecture: Federated Analytics with Centralized Data Platform
+
+While pure Data Mesh and Data Fabric architectures represent opposite ends of the spectrum, many airlines implement hybrid approaches that combine the business-oriented governance of Data Mesh with the technical advantages of centralized platforms. This section explores how GlobalAir implemented federated analytics within a centralized lakehouse architecture.
+
+```mermaid
+graph TB
+    subgraph "Hybrid Architecture Model"
+        A[Domain Teams] --> B[Federated Analytics]
+        B --> C[Centralized Lakehouse]
+        C --> D[Enterprise Analytics Platform]
+        
+        subgraph "Governance Split"
+            E[Domain Data Ownership]
+            F[Shared Data Standards]
+            G[Federated Governance]
+            H[Central Infrastructure]
+        end
+        
+        D --- E
+        D --- F
+        D --- G
+        D --- H
+    end
+    
+    style A fill:#f5f5f5,stroke:#333,stroke-width:2px
+    style B fill:#e6f3ff,stroke:#333,stroke-width:2px
+    style C fill:#ffe6e6,stroke:#333,stroke-width:2px
+    style D fill:#e6ffe6,stroke:#333,stroke-width:2px
+```
+
+### 1. Federated Analytics with Central Infrastructure
+
+#### Structural Framework
+- **Domain Autonomy with Shared Platform**: Business domains maintain ownership of their data products while leveraging a common technical platform
+- **Clear Responsibility Boundaries**: Infrastructure and platform services managed centrally, while data product development and quality remain domain responsibilities
+- **Unified Technical Standards**: Common data formats, API specifications, and interoperability requirements enforced across domains
+- **Decentralized Analytics Capabilities**: Domain-specific analytical tools and applications built on top of the shared foundation
+
+#### Implementation Architecture
+```mermaid
+graph TB
+    subgraph "Centralized Platform"
+        A[Delta Lakehouse] --- B[Compute Resources]
+        B --- C[Security Services]
+        C --- D[Governance Framework]
+    end
+    
+    subgraph "Federated Analytics"
+        E[Flight Ops Analytics] --- I[Centralized Platform]
+        F[Customer Analytics] --- I
+        G[Revenue Analytics] --- I
+        H[Maintenance Analytics] --- I
+    end
+    
+    I[Centralized Platform] --- A
+    
+    style A fill:#f9c74f,stroke:#333,stroke-width:2px
+    style B fill:#f9c74f,stroke:#333,stroke-width:2px
+    style C fill:#f9c74f,stroke:#333,stroke-width:2px
+    style D fill:#f9c74f,stroke:#333,stroke-width:2px
+    style E fill:#90be6d,stroke:#333,stroke-width:2px
+    style F fill:#90be6d,stroke:#333,stroke-width:2px
+    style G fill:#90be6d,stroke:#333,stroke-width:2px
+    style H fill:#90be6d,stroke:#333,stroke-width:2px
+```
+
+- **Centralized Platform Components**:
+  - **Delta Lakehouse**: Single storage layer providing ACID transactions, schema enforcement, and time travel capabilities across the organization
+  - **Shared Compute Resources**: Dynamically scalable processing capabilities allocated to domains based on workload demands
+  - **Unified Security Services**: Centrally managed authentication, authorization, and data protection controls
+  - **Common Governance Framework**: Organization-wide policies, compliance standards, and metadata management
+
+- **Federated Analytics Layer**:
+  - **Domain-Specific Analytics**: Custom analytical applications tailored to each business domain's unique needs
+  - **Self-Service Tools**: Specialized visualization and exploration tools selected by each domain
+  - **Domain Data Products**: APIs, datasets, and models created and maintained by domain teams
+  - **Cross-Domain Collaboration**: Standardized interfaces for sharing insights between domains
+
+### 2. Technical Implementation
+
+#### Lakehouse Architecture
+```mermaid
+graph TB
+    subgraph "Unified Lakehouse"
+        A[Raw Zone] --> B[Bronze Zone]
+        B --> C[Silver Zone]
+        C --> D[Gold Zone]
+        
+        subgraph "Analytics Zones"
+            E[Domain 1 Analytics]
+            F[Domain 2 Analytics]
+            G[Domain 3 Analytics]
+            H[Enterprise Analytics]
+        end
+        
+        D --- E
+        D --- F
+        D --- G
+        D --- H
+    end
+    
+    style A fill:#f5f5f5,stroke:#333,stroke-width:2px
+    style B fill:#e6f3ff,stroke:#333,stroke-width:2px
+    style C fill:#ffe6e6,stroke:#333,stroke-width:2px
+    style D fill:#e6ffe6,stroke:#333,stroke-width:2px
+```
+
+- **Multi-Layer Data Organization**:
+  - **Raw Zone**: Landing area for all data before processing, centrally managed
+  - **Bronze Zone**: Standardized, validated data with unified schema enforcement
+  - **Silver Zone**: Quality-checked, transformed data ready for consumption
+  - **Gold Zone**: Business-ready datasets optimized for analytics and reporting
+
+- **Technology Stack Integration**:
+  - **Storage Layer**: Delta Lake or Apache Iceberg providing ACID transactions and schema evolution
+  - **Processing Framework**: Spark clusters for batch processing and Flink for streaming workloads
+  - **SQL Interfaces**: Trino/Presto providing consistent SQL access across data sources
+  - **Orchestration Layer**: Airflow or Dagster managing complex analytical pipelines
+  
+- **Self-Service Capabilities**:
+  - **SQL Workbenches**: Domain analysts access data through familiar SQL interfaces
+  - **Notebook Environments**: Data scientists leverage Python/R environments for advanced analytics
+  - **Visualization Platforms**: Business users interact with domain-specific dashboards and reports
+  - **API Layer**: Applications consume data products through standardized interfaces
+
+#### Centralized Platform Benefits
+- **Cost Efficiencies**: Shared infrastructure reduces duplication and optimizes resource utilization
+- **Performance Optimization**: Centrally managed query optimization and caching
+- **Reduced Data Movement**: Co-located processing eliminates extensive ETL requirements
+- **Simplified Compliance**: Unified auditing, lineage tracking, and access controls
+- **Enterprise-Wide Consistency**: Common formats, definitions, and quality standards
+
+### 3. Federated Governance Model
+
+#### Responsibility Matrix
+
+| Aspect | Domain Teams | Central Platform Team |
+|--------|-------------|----------------------|
+| Data Ownership | ✓ | |
+| Quality Standards | ✓ | |
+| Business Definitions | ✓ | |
+| Data Products | ✓ | |
+| Security Controls | Implement | Define |
+| Technical Standards | Adhere | Define |
+| Platform Services | Consume | Provide |
+| Infrastructure | | ✓ |
+| Enterprise Policies | Implement | Define |
+
+#### Federated Decision Making
+- **Domain Councils**: Cross-functional teams within each domain that make data-related decisions
+- **Architecture Review Board**: Cross-domain group that ensures technical alignment and compatibility
+- **Data Product Guild**: Community of practice sharing implementation patterns and best practices
+- **Executive Data Governance**: Senior leadership providing strategic direction and resource allocation
+
+#### Collaborative Processes
+- **Standards Development**: Domains contribute to central technical standards based on real-world requirements
+- **Platform Roadmap**: Features prioritized based on domain needs and business impact
+- **Shared Knowledge Base**: Documentation and training resources contributed by both central and domain teams
+- **Center of Excellence**: Experts from domains and central teams collaborating on complex challenges
+
+### 4. GlobalAir Case Study: Hybrid Implementation Journey
+
+#### Starting Point
+- **Legacy Situation**: Siloed data warehouses and departmental analytical applications
+- **Business Challenges**: Slow time-to-insight, inconsistent metrics across departments, and high maintenance costs
+- **Technical Constraints**: Inflexible infrastructure, limited scalability, and high operational overhead
+- **Organizational Issues**: Conflicting priorities between central IT and business units
+
+#### Transition Strategy
+1. **Foundation Building**:
+   - Implement core lakehouse infrastructure with Delta Lake on cloud storage
+   - Establish unified security model and governance framework
+   - Develop initial data quality standards and monitoring tools
+   - Create self-service documentation and onboarding resources
+
+2. **Domain Enablement**:
+   - Identify pilot domains with clear business value
+   - Form domain data teams with mixed IT and business skills
+   - Define initial data products and ownership boundaries
+   - Establish domain-specific quality metrics and success criteria
+
+3. **Scaling Operations**:
+   - Develop automated CI/CD pipelines for data products
+   - Implement cross-domain data sharing protocols
+   - Establish federated governance model with clear responsibilities
+   - Create continuous improvement feedback loops
+
+#### Implementation Outcomes
+- **Accelerated Analytics Development**: 64% reduction in time to deploy new analytical applications
+- **Improved Data Quality**: 78% decrease in data quality incidents through domain ownership
+- **Enhanced Collaboration**: 3x increase in cross-domain data product usage
+- **Cost Optimization**: 42% reduction in total cost of ownership compared to previous architecture
+- **Business Agility**: 5x faster introduction of new data-driven capabilities
+
+#### Key Success Factors
+1. **Clear Ownership Boundaries**: Well-defined responsibilities between domain and central teams
+2. **Executive Sponsorship**: Active leadership support for the transition and organizational changes
+3. **Skills Development**: Comprehensive training program for both technical and business teams
+4. **Incremental Approach**: Phased implementation allowing for learning and adjustment
+5. **Measurable Outcomes**: Clear metrics tracking both technical and business benefits
+
+### 5. Best Practices for Hybrid Implementation
+
+#### Architectural Considerations
+- **Right-Size Centralization**: Centralize only what provides clear economies of scale
+- **Domain Boundaries**: Define domains based on business capabilities, not organizational structure
+- **Technical Consistency**: Implement common standards for interoperability while allowing domain flexibility
+- **Data Classifications**: Distinguish between domain-specific and shared enterprise data assets
+- **API-First Approach**: Ensure all data products have well-defined interfaces regardless of implementation
+
+#### Organizational Alignment
+- **Operating Model Evolution**: Clearly define how central and domain teams interact and make decisions
+- **Career Paths**: Create growth opportunities that span both domain expertise and platform knowledge
+- **Budget Allocation**: Establish funding models that balance centralized platform and domain-specific investments
+- **Metrics Framework**: Develop KPIs that measure both technical efficiency and business outcomes
+- **Community Building**: Foster collaboration through communities of practice and knowledge sharing
+
+#### Implementation Roadmap
+1. **Assessment**: Evaluate current state and identify key business drivers for change
+2. **Vision Development**: Define target architecture balancing centralization and federation
+3. **Platform Foundation**: Establish core infrastructure and governance framework
+4. **Domain Pilot**: Implement first domain data products on the shared platform
+5. **Iterative Expansion**: Add domains and capabilities based on business priorities
+6. **Continuous Evolution**: Regularly reassess the balance between centralization and federation
+
 ## Next Steps
 
 The next chapter will explore how Domain-Driven Design principles guide the creation and evolution of data domains in the airline industry.
