@@ -60,7 +60,7 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
         # Find all numbered chapter files
         chapter_files = []
         for filename in os.listdir(book_dir):
-            if filename.endswith('.md') and filename != "README.md" and filename[0].isdigit():
+            if filename.endswith('.md') and filename != "README.md" and (filename[0].isdigit() or (filename.startswith('chapter') and len(filename) > 7 and filename[7].isdigit())):
                 chapter_files.append(filename)
         
         chapter_files.sort()  # Sort by filename
