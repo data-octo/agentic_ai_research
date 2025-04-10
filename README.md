@@ -7,7 +7,14 @@ Agentic AI refers to artificial intelligence systems capable of autonomous decis
 
 The aviation industry generates significant data, with commercial aircraft producing up to 20 terabytes per engine per flight hour, as noted in a 2022 article by Thoughtworks ([Data mesh Tackling five of the aviation industry’s biggest data challenges | Thoughtworks](https://www.thoughtworks.com/insights/articles/data-mesh-tackling-five-of-the-aviation-industry-s-biggest-data-)). This underscores the need for advanced data architectures to support AI applications, such as predictive maintenance and real-time decision-making, enhancing efficiency and safety.
 
-#### Proposed Book Series Structure
+## Books for Agentic AI with Aviation Industry
+
+1. **agentic_ai_transformation_airline** - Transform Aviation Industry with Agentic AI 
+2. **agentic_ai_transformation_airline** - Agentic AI for Aviation Industry with Digital Workforce and Autonomous AI Agents
+3. **agentic_ai_modern_data_architecture** - Agentic AI with Modern Enterprise Data Architecture for Airline Company
+4. **airline_enterprise_data_architecture_transform** - Enterprise Data Architecture for Airline Company
+
+### Proposed Book Series Structure
 
 Given the scope, a series of 10 volumes is proposed, each focusing on a specific aspect of agentic AI and data architecture in aviation. The structure aims to balance foundational knowledge, practical applications, and forward-looking insights, catering to aviation professionals, data scientists, and industry stakeholders. Below is a detailed breakdown:
 
@@ -62,11 +69,7 @@ book_name/
     └── ...
 ```
 
-## Available Books
 
-1. **agentic_ai_modern_data_architecture** - Agentic AI with Modern Enterprise Data Architecture for Airline Companies
-2. **agentic_ai_transformation_airline** - Guide to Agentic AI Transformation
-3. **airline_enterprise_data_architecture_transform** - Enterprise Data Architecture
 
 ## Converting Books to HTML
 
