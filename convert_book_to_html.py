@@ -85,7 +85,7 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
 
             # Remove any existing TOC from README content
             readme_content = re.sub(r'(?s)^\s*#\s*Table of Contents.*?(?=\n#|\Z)', '', readme_content, flags=re.IGNORECASE)
-
+            book_title = re.search(r'#\s*(.*?)\s*$', readme_content, re.MULTILINE).group(1).strip()
             # Convert markdown to HTML
             readme_html = markdown.markdown(
                 readme_content,
@@ -93,17 +93,15 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
             )
             all_content.append(readme_html)
             print("✓ Processed README.md", file=sys.stderr)
+        
+        # Remove leading digit numbers from the book title
+        # book_title = re.sub(r'^\d+\s+', '', book_title)  # Remove leading numbers from title
+        # Get book title from readme heading
+       
+        
 
-        # Add author information
-        author_info = """
-        <section id='about-author'>
-            <h2>About the Author</h2>
-            <p>Tedd Yuan is a visionary technology leader with a distinguished career spanning global markets, including Canada, Ireland, Singapore, and China. With a wealth of expertise in enterprise architecture, software development, and digital transformation, Tedd has consistently driven innovation and delivered strategic business outcomes. His leadership in managing cross-functional teams has been instrumental in shaping cutting-edge solutions that align with organizational goals.</p>
-            <p>Currently serving as the Enterprise Architect - Data at Cathay Pacific, Tedd Yuan is at the forefront of designing and implementing enterprise-wide data strategies. He ensures that project solutions adhere to industry standards and regulatory requirements while crafting architectural blueprints and roadmaps for AI/ML and Data Analytics solutions on AWS. Tedd's pioneering work in integrating Generative AI and cloud technologies has empowered organizations to make data-driven decisions and achieve operational excellence.</p>
-            <p>As the author of the acclaimed "Airline AI Transformation Series," Tedd explores the transformative potential of agentic AI in revolutionizing airline operations, workforce dynamics, and customer experiences. His deep industry insights and innovative approach position him as a thought leader in leveraging technology to drive business transformation. Tedd Yuan is a sought-after expert for roles that demand strategic vision, technical acumen, and a passion for innovation.</p>
-        </section>
-        """
-        # all_content.append(author_info)
+
+  
 
         # Generate Table of Contents (TOC) with consistent numbering and links
         toc_items = []
@@ -189,7 +187,7 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
         # Only include the main content
         full_content = "\n".join(all_content)
 
-        # Create final HTML with TOC
+               # Create final HTML with TOC
         final_html = HTML_TEMPLATE.format(
             title=book_title,  # Title for the <title> tag without version info
             version=version,   # Include version info in the header
