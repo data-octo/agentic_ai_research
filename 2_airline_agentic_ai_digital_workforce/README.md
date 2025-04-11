@@ -14,19 +14,21 @@ As the author of the acclaimed "Airline AI Transformation Series," Tedd explores
 
 ### Table of Contents
 
-1. [Introduction: Transforming Aviation with Agentic AI](./chapters/01_introduction.md)
-2. [Modern Enterprise Data Architecture](./chapters/02_modern_enterprise_data_architecture.md)
-3. [Agentic AI Systems](./chapters/03_agentic_ai_systems.md)
-4. [Aviation Data Landscape and Challenges](./chapters/04_aviation_data_landscape_and_challenges.md)
-5. [Data Fabric and Data Mesh for Airlines](./chapters/05_data_fabric_and_data_mesh_for_airlines.md)
-6. [Autonomous AI Agents in Airline Operations](./chapters/06_autonomous_ai_agents_in_airline_operations.md)
-7. [Customer Experience Transformation with Agentic AI](./chapters/07_customer_experience_transformation_with_agentic_ai.md)
+1. [Introduction: Transforming Aviation with Agentic AI](./chapters/chapter1_introduction.md)
+2. [Understanding AI Agents](./chapters/chapter2_understanding_ai_agents.md)
+3. [Digital Workforce](./chapters/chapter3_digital_workforce.md)
+4. [IT Strategy](./chapters/chapter4_it_strategy.md)
+5. [Technology Foundation](./chapters/chapter5_technology_foundation.md)
+6. [Implementation Roadmap](./chapters/chapter6_implementation_roadmap.md)
+7. [Governance and Compliance](./chapters/chapter7_governance_compliance.md)
+8. [Case Studies](./chapters/chapter8_case_studies.md)
+9. [Future Trends](./chapters/chapter9_future_trends.md)
 
 ### How to Use This Book
 This book is structured to cater to a diverse audience:
-- **Aviation Professionals**: Focus on chapters 4, 5, and 7 for practical applications and strategies.
-- **AI Enthusiasts**: Chapters 2 and 6 provide insights into the technological and future aspects of AI.
-- **Business Leaders**: Chapters 1, 3, and 5 offer strategic perspectives on leveraging AI in aviation.
+- **Aviation Professionals**: Focus on chapters 3, 4, and 5 for practical applications and strategies.
+- **AI Enthusiasts**: Chapters 2 and 9 provide insights into the technological and future aspects of AI.
+- **Business Leaders**: Chapters 1, 3, and 8 offer strategic perspectives on leveraging AI in aviation.
 
 ### Contributing
 This book is a collaborative effort aimed at advancing the understanding and application of AI in aviation. Contributions and feedback are welcome through pull requests and issues.

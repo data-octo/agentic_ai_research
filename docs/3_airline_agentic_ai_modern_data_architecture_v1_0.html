@@ -1,81 +1,102 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3 Airline Agentic Ai Modern Data Architecture - v1.0</title>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <!-- Include Mermaid -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'default',
+                securityLevel: 'loose',
+                flowchart: {
+                    useMaxWidth: true,
+                    htmlLabels: true,
+                    curve: 'basis'
+                },
+                sequence: {
+                    useMaxWidth: true,
+                    showSequenceNumbers: true
+                },
+                gantt: {
+                    useMaxWidth: true
+                }
+            });
+        });
+    </script>
     <style>
+        :root {
+            --primary-color: #333;
+            --secondary-color: #666;
+            --background-color: #ffffff;
+            --code-background: #f5f5f5;
+            --border-color: #ddd;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: "Times New Roman", Times, serif;
             line-height: 1.6;
-            max-width: 900px;
+            font-size: 16px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
-            color: #2c3e50;
+            background-color: var(--background-color);
+            color: var(--primary-color);
         }
-        .mermaid {
-            background-color: white;
-            padding: 1em;
-            margin: 2em 0;
-            text-align: center;
-            border: 1px solid #eee;
-            border-radius: 5px;
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--primary-color);
         }
+
         pre {
-            background-color: #f6f8fa;
+            background-color: var(--code-background);
             padding: 1em;
             border-radius: 5px;
             overflow-x: auto;
         }
+
         code {
-            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-            font-size: 0.9em;
-            background-color: rgba(27, 31, 35, 0.05);
+            font-family: Consolas, "Courier New", monospace;
+            background-color: var(--code-background);
             padding: 0.2em 0.4em;
             border-radius: 3px;
         }
+
         table {
             border-collapse: collapse;
             width: 100%;
             margin: 2em 0;
         }
+
         th, td {
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             padding: 8px;
             text-align: left;
         }
+
         th {
-            background-color: #f6f8fa;
+            background-color: var(--code-background);
         }
-        h1, h2, h3, h4, h5, h6 {
-            color: #2c3e50;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        h1 {
-            border-bottom: 1px solid #eaecef;
-            padding-bottom: 0.3rem;
-        }
-        .chapter {
-            margin-top: 3rem;
-            border-top: 1px solid #eee;
-            padding-top: 2rem;
-        }
+
         a {
-            color: #3498db;
+            color: var(--secondary-color);
             text-decoration: none;
         }
+
         a:hover {
             text-decoration: underline;
         }
+
         blockquote {
-            border-left: 4px solid #dfe2e5;
+            border-left: 4px solid var(--border-color);
             padding: 0 1em;
-            color: #6a737d;
+            color: var(--secondary-color);
             margin: 0 0 16px;
         }
+
         img {
             max-width: 100%;
             height: auto;
@@ -83,61 +104,49 @@
     </style>
 </head>
 <body>
-    <h1>3 Airline Agentic Ai Modern Data Architecture - v1.0</h1>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            mermaid.initialize({
-                startOnLoad: true,
-                theme: 'default',
-                securityLevel: 'loose'
-            });
-        });
-    </script>
     
-        <div class="cover">
-            <h1>Agentic AI for Aviation Industry: Transforming IT Departments with Autonomous AI Agents and Digital Workforce</h1>
-            <div class="subtitle">Transforming IT Departments with Autonomous AI Agents and Digital Workforce</div>
-            <div class="author">Technical Architecture Series</div>
-            <div class="author">Tedd Yuan</div>
-            <div class="date">April 2025</div>
-        </div>
-        <div class="toc">
-            <h1>Table of Contents</h1>
-            <ul>
-                <li style="margin-left: 0em"><a href="#chapter-1-chapter-1:-introduction-to-agentic-ai-in-aviation">Chapter 1: Introduction to Agentic AI in Aviation</a></li>
-                <!-- Add more TOC entries as needed -->
-            </ul>
-        </div>
-        <h1>Agentic AI with Modern Enterprise Data Architecture for Airline Companies</h1>
-<h2>Book Overview</h2>
-<p>This book explores the transformative potential of agentic artificial intelligence systems within modernized enterprise data architectures specifically tailored for airline companies. As the aviation industry faces unprecedented challenges and opportunities in the digital age, this comprehensive guide provides practical frameworks, strategies, and implementation roadmaps for leveraging autonomous AI agents to revolutionize airline operations, customer experience, and business models.</p>
-<h2>Target Audience</h2>
-<ul>
-<li>Airline industry executives and decision-makers</li>
-<li>Data architects and enterprise architects in the aviation sector</li>
-<li>IT leaders and technology strategists in airline companies</li>
-<li>Data scientists and AI specialists working with airline data</li>
-<li>Business analysts focused on aviation industry transformation</li>
-</ul>
-<h2>Chapters</h2>
+    <h1>Transform Aviation Industry with Agentic AI Technology</h1>
+<h2>Revolutionizing Aviation with Agentic AI</h2>
+<h3>About This Book</h3>
+<p>This book delves into the transformative potential of Agentic AI technology in the aviation industry. It is designed for aviation professionals, AI enthusiasts, and business leaders who are keen to explore how AI can address challenges and unlock opportunities in aviation.</p>
+<h3>About the Author</h3>
+<p>Tedd Yuan is a visionary technology leader with a distinguished career spanning global markets, including Canada, Ireland, Singapore, and China. With a wealth of expertise in enterprise architecture, software development, and digital transformation, Tedd has consistently driven innovation and delivered strategic business outcomes. His leadership in managing cross-functional teams has been instrumental in shaping cutting-edge solutions that align with organizational goals.</p>
+<p>Currently serving as the Enterprise Architect - Data at Cathay Pacific, Tedd Yuan is at the forefront of designing and implementing enterprise-wide data strategies. He ensures that project solutions adhere to industry standards and regulatory requirements while crafting architectural blueprints and roadmaps for AI/ML and Data Analytics solutions on AWS. Tedd's pioneering work in integrating Generative AI and cloud technologies has empowered organizations to make data-driven decisions and achieve operational excellence.</p>
+<p>As the author of the acclaimed "Airline AI Transformation Series," Tedd explores the transformative potential of agentic AI in revolutionizing airline operations, workforce dynamics, and customer experiences. His deep industry insights and innovative approach position him as a thought leader in leveraging technology to drive business transformation. Tedd Yuan is a sought-after expert for roles that demand strategic vision, technical acumen, and a passion for innovation.</p>
+<h3>Table of Contents</h3>
 <ol>
-<li><strong>Introduction to Agentic AI in Aviation</strong></li>
-<li><strong>Modern Enterprise Data Architecture Fundamentals</strong></li>
-<li><strong>Agentic AI Systems: Principles and Applications</strong></li>
-<li><strong>Aviation Data Landscape and Challenges</strong></li>
-<li><strong>Data Fabric and Data Mesh for Airlines</strong></li>
-<li><strong>Autonomous AI Agents in Airline Operations</strong></li>
-<li><strong>Customer Experience Transformation with Agentic AI</strong></li>
-<li><strong>Implementation Strategy and Roadmap</strong></li>
-<li><strong>Governance, Ethics, and Regulatory Considerations</strong></li>
-<li><strong>Future Trends and Innovation Opportunities</strong></li>
+<li><a href="./chapters/01_introduction.md">Introduction: Transforming Aviation with Agentic AI</a></li>
+<li><a href="./chapters/02_modern_enterprise_data_architecture.md">Modern Enterprise Data Architecture</a></li>
+<li><a href="./chapters/03_agentic_ai_systems.md">Agentic AI Systems</a></li>
+<li><a href="./chapters/04_aviation_data_landscape_and_challenges.md">Aviation Data Landscape and Challenges</a></li>
+<li><a href="./chapters/05_data_fabric_and_data_mesh_for_airlines.md">Data Fabric and Data Mesh for Airlines</a></li>
+<li><a href="./chapters/06_autonomous_ai_agents_in_airline_operations.md">Autonomous AI Agents in Airline Operations</a></li>
+<li><a href="./chapters/07_customer_experience_transformation_with_agentic_ai.md">Customer Experience Transformation with Agentic AI</a></li>
 </ol>
-<h2>How to Use This Book</h2>
-<p>Each chapter builds on concepts from previous chapters while offering practical insights that can be applied independently. Case studies, diagrams, and implementation frameworks are provided to help readers visualize and execute the concepts presented.</p>
-<hr />
-<p>© 2025 | This book serves as a comprehensive guide for airline companies looking to leverage the power of agentic AI within modern data architectures to drive innovation and competitive advantage.</p>
-<h2>Table of Contents</h2><ol><li><a href="#01_introduction.md">Introduction</a></li><li><a href="#02_modern_enterprise_data_architecture.md">Modern Enterprise Data Architecture</a></li><li><a href="#03_agentic_ai_systems.md">Agentic Ai Systems</a></li><li><a href="#04_aviation_data_landscape_and_challenges.md">Aviation Data Landscape And Challenges</a></li><li><a href="#05_data_fabric_and_data_mesh_for_airlines.md">Data Fabric And Data Mesh For Airlines</a></li><li><a href="#06_autonomous_ai_agents_in_airline_operations.md">Autonomous Ai Agents In Airline Operations</a></li><li><a href="#07_customer_experience_transformation_with_agentic_ai.md">Customer Experience Transformation With Agentic Ai</a></li></ol>
-<div id="01_introduction.md" class="chapter"><h1>Chapter 1: Introduction to Agentic AI in Aviation</h1>
+<h3>How to Use This Book</h3>
+<p>This book is structured to cater to a diverse audience:
+- <strong>Aviation Professionals</strong>: Focus on chapters 4, 5, and 7 for practical applications and strategies.
+- <strong>AI Enthusiasts</strong>: Chapters 2 and 6 provide insights into the technological and future aspects of AI.
+- <strong>Business Leaders</strong>: Chapters 1, 3, and 5 offer strategic perspectives on leveraging AI in aviation.</p>
+<h3>Contributing</h3>
+<p>This book is a collaborative effort aimed at advancing the understanding and application of AI in aviation. Contributions and feedback are welcome through pull requests and issues.</p>
+<h3>License</h3>
+<p>© 2025 All Rights Reserved</p>
+<section id="table-of-contents">
+<h2>Table of Contents</h2>
+<nav>
+<ul>
+<li><a href="#01_introduction">01 Introduction</a></li>
+<li><a href="#02_modern_enterprise_data_architecture">02 Modern Enterprise Data Architecture</a></li>
+<li><a href="#03_agentic_ai_systems">03 Agentic Ai Systems</a></li>
+<li><a href="#04_aviation_data_landscape_and_challenges">04 Aviation Data Landscape And Challenges</a></li>
+<li><a href="#05_data_fabric_and_data_mesh_for_airlines">05 Data Fabric And Data Mesh For Airlines</a></li>
+<li><a href="#06_autonomous_ai_agents_in_airline_operations">06 Autonomous Ai Agents In Airline Operations</a></li>
+<li><a href="#07_customer_experience_transformation_with_agentic_ai">07 Customer Experience Transformation With Agentic Ai</a></li>
+</ul>
+</nav>
+</section>
+<div id="01_introduction" class="chapter"><h2>01 Introduction</h2><h1>Chapter 1: Introduction to Agentic AI in Aviation</h1>
 <h2>The Dawn of Autonomous Intelligence in the Airline Industry</h2>
 <p>The airline industry stands at a pivotal crossroads in 2025. After weathering unprecedented challenges in the first half of the 2020s, airlines worldwide are now embracing technological innovation as the cornerstone of resilience, efficiency, and competitive advantage. Among these innovations, none holds more transformative potential than agentic artificial intelligence—autonomous AI systems capable of perceiving their environment, making decisions, and taking actions to achieve specific objectives with minimal human oversight.</p>
 <p>Unlike traditional AI systems that merely process and analyze data, agentic AI represents a paradigm shift toward truly autonomous digital workers that can navigate complex operational environments, adapt to changing conditions, and continuously optimize their performance. For airline companies managing vast networks of flights, personnel, equipment, customers, and regulatory requirements, this evolution from passive to active AI promises to revolutionize every facet of the business.</p>
@@ -213,7 +222,7 @@ graph TB
 <p>As we progress through 2025, the adoption of agentic AI and modern data architecture is no longer optional for airlines seeking to remain competitive. Industry leaders have already begun their transformation journeys, with early deployments showing promising results in operational efficiency, customer satisfaction, and financial performance.</p>
 <p>The COVID-19 pandemic taught the industry that resilience requires both operational flexibility and technological adaptability. Airlines that invested in digital transformation prior to the pandemic recovered faster and emerged stronger than their peers. Similarly, the airlines that embrace agentic AI and modern data architecture today will be better positioned to navigate future disruptions and capture emerging opportunities.</p>
 <p>In the chapters that follow, we will explore each element of this transformation in detail, providing airline leaders with the knowledge and frameworks needed to embark on their own journeys toward an intelligent, autonomous future.</p></div>
-<div id="02_modern_enterprise_data_architecture.md" class="chapter"><h1>Chapter 2: Modern Enterprise Data Architecture Fundamentals</h1>
+<div id="02_modern_enterprise_data_architecture" class="chapter"><h2>02 Modern Enterprise Data Architecture</h2><h1>Chapter 2: Modern Enterprise Data Architecture Fundamentals</h1>
 <h2>Evolution of Data Architecture in the Airline Industry</h2>
 <p>The history of data management in the airline industry mirrors the broader evolution of enterprise computing. From the earliest days of computerized reservation systems in the 1950s to today's complex digital ecosystems, airlines have consistently been at the forefront of technology adoption. This evolution can be understood through several distinct phases:</p>
 <h3>First Wave: Centralized Mainframes (1960s-1980s)</h3>
@@ -435,7 +444,7 @@ flowchart TB
 <h2>Conclusion</h2>
 <p>Modern enterprise data architecture provides the essential foundation for airlines seeking to leverage agentic AI and other advanced technologies. By embracing principles like data as a product, domain-driven design, and cloud-native infrastructure, airlines can overcome the limitations of legacy approaches and create the conditions for innovation, efficiency, and resilience.</p>
 <p>In the next chapter, we'll explore agentic AI systems in detail, examining how these autonomous intelligent agents operate and the specific ways they can transform airline operations when deployed on a modern data architecture foundation.</p></div>
-<div id="03_agentic_ai_systems.md" class="chapter"><h1>Chapter 3: Agentic AI Systems: Principles and Applications</h1>
+<div id="03_agentic_ai_systems" class="chapter"><h2>03 Agentic Ai Systems</h2><h1>Chapter 3: Agentic AI Systems: Principles and Applications</h1>
 <h2>Understanding Agentic AI</h2>
 <p>Agentic AI represents a fundamental evolution in artificial intelligence, moving beyond traditional systems that merely analyze data or respond to specific queries. At its core, an agentic AI system is characterized by its ability to:</p>
 <ol>
@@ -799,7 +808,7 @@ graph LR
 <p>Agentic AI represents a paradigm shift in how airlines can leverage artificial intelligence—moving from isolated, task-specific applications to integrated, autonomous systems that can perceive, reason, plan, and act across the enterprise. By combining multiple AI capabilities within a goal-oriented framework, these systems can address the complexity and dynamics of airline operations in ways that were previously impossible.</p>
 <p>The implementation of agentic AI is not merely a technical challenge but a transformational journey that requires rethinking processes, roles, and organizational structures. Airlines that successfully navigate this transformation will gain significant advantages in operational efficiency, customer experience, and competitive agility.</p>
 <p>In the next chapter, we'll explore the specific challenges and opportunities of the aviation data landscape, examining how airlines can build the data foundation necessary to support agentic AI initiatives.</p></div>
-<div id="04_aviation_data_landscape_and_challenges.md" class="chapter"><h1>Chapter 4: Aviation Data Landscape and Challenges</h1>
+<div id="04_aviation_data_landscape_and_challenges" class="chapter"><h2>04 Aviation Data Landscape And Challenges</h2><h1>Chapter 4: Aviation Data Landscape and Challenges</h1>
 <h2>The Complex Data Ecosystem of Modern Airlines</h2>
 <p>Airlines operate one of the most data-intensive businesses in the global economy. Every flight generates millions of data points across hundreds of systems, while every passenger interaction creates a digital trail that spans booking, travel, service, and post-journey engagement. Understanding this complex ecosystem is essential for organizations seeking to leverage agentic AI and modern data architecture.</p>
 <h3>Data Volume, Velocity, and Variety</h3>
@@ -1189,7 +1198,7 @@ graph TD
 <p>By addressing the fundamental data challenges—fragmentation, quality, real-time access, and integration complexity—airlines can build the foundation necessary for agentic AI systems to deliver transformative value. This foundation must include unified entity models, real-time integration capabilities, historical context, external data integration, and robust data quality management.</p>
 <p>The transition from legacy data environments to modern architecture will be a journey rather than a destination. Most airlines will benefit from hybrid approaches that balance immediate business needs with long-term strategic direction, incrementally building capabilities while delivering tangible value at each step.</p>
 <p>In the next chapter, we'll explore how data fabric and data mesh approaches can be specifically applied to airline data challenges, providing architectural patterns that enable both business agility and technical scalability.</p></div>
-<div id="05_data_fabric_and_data_mesh_for_airlines.md" class="chapter"><h1>Chapter 5: Data Fabric and Data Mesh for Airlines</h1>
+<div id="05_data_fabric_and_data_mesh_for_airlines" class="chapter"><h2>05 Data Fabric And Data Mesh For Airlines</h2><h1>Chapter 5: Data Fabric and Data Mesh for Airlines</h1>
 <h2>The Need for New Architectural Paradigms</h2>
 <p>Traditional approaches to enterprise data architecture have proven insufficient for the scale, complexity, and dynamism of modern airline operations. Centralized data warehouses and monolithic data lakes often become bottlenecks to innovation, struggling with:</p>
 <ul>
@@ -1675,7 +1684,7 @@ graph TD
 </ul>
 <p>For airlines navigating the complexity of modern data landscapes, these patterns provide a practical path forward—one that balances central coordination with domain autonomy, technical sophistication with business alignment, and governance requirements with innovation needs.</p>
 <p>In the next chapter, we'll explore how these architectural patterns enable specific applications of autonomous AI agents in airline operations, examining use cases that deliver tangible business value.</p></div>
-<div id="06_autonomous_ai_agents_in_airline_operations.md" class="chapter"><h1>Chapter 6: Autonomous AI Agents in Airline Operations</h1>
+<div id="06_autonomous_ai_agents_in_airline_operations" class="chapter"><h2>06 Autonomous Ai Agents In Airline Operations</h2><h1>Chapter 6: Autonomous AI Agents in Airline Operations</h1>
 <h2>The Evolution of Operational Intelligence</h2>
 <p>Airline operations represent one of the most complex coordination challenges in modern business. Every day, airlines must synchronize thousands of flights, tens of thousands of employees, millions of passengers, and hundreds of aircraft across a global network influenced by weather, air traffic, maintenance issues, and countless other variables. The traditional approach to managing this complexity has evolved through several stages:</p>
 <h3>Manual Coordination (1950s-1970s)</h3>
@@ -2295,7 +2304,7 @@ graph TD
 <p>Autonomous AI agents represent the next frontier in airline operational excellence. By combining advanced AI technologies with domain-specific operational knowledge, these systems can transform how airlines manage their complex networks. The transition from traditional operations to autonomous systems is not merely a technological change but a fundamental transformation of how airlines function.</p>
 <p>The most successful implementations will recognize that autonomous agents are not replacements for human expertise but powerful partners that handle routine complexity while enabling humans to focus on strategic decisions, exceptional situations, and continuous improvement. This human-AI partnership creates operations that are more efficient, resilient, and customer-centric than either humans or AI could achieve independently.</p>
 <p>In the next chapter, we'll explore how these autonomous operational agents can be leveraged specifically for customer experience transformation, creating seamless, personalized journeys that differentiate leading airlines in an increasingly competitive marketplace.</p></div>
-<div id="07_customer_experience_transformation_with_agentic_ai.md" class="chapter"><h1>Chapter 7: Customer Experience Transformation with Agentic AI</h1>
+<div id="07_customer_experience_transformation_with_agentic_ai" class="chapter"><h2>07 Customer Experience Transformation With Agentic Ai</h2><h1>Chapter 7: Customer Experience Transformation with Agentic AI</h1>
 <h2>The Evolution of Airline Customer Experience</h2>
 <p>The airline customer experience has undergone significant transformation throughout aviation history, each era marked by distinct innovations and approaches:</p>
 <h3>The Golden Age (1950s-1960s)</h3>

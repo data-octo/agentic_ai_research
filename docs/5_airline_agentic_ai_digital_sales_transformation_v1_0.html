@@ -1,85 +1,102 @@
----
-layout: default
-title: Agentic AI for Aviation Industry
----
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>5 Airline Agentic Ai Digital Sales Transformation - v1.0</title>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <!-- Include Mermaid -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'default',
+                securityLevel: 'loose',
+                flowchart: {
+                    useMaxWidth: true,
+                    htmlLabels: true,
+                    curve: 'basis'
+                },
+                sequence: {
+                    useMaxWidth: true,
+                    showSequenceNumbers: true
+                },
+                gantt: {
+                    useMaxWidth: true
+                }
+            });
+        });
+    </script>
     <style>
+        :root {
+            --primary-color: #333;
+            --secondary-color: #666;
+            --background-color: #ffffff;
+            --code-background: #f5f5f5;
+            --border-color: #ddd;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: "Times New Roman", Times, serif;
             line-height: 1.6;
-            max-width: 900px;
+            font-size: 16px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
-            color: #2c3e50;
+            background-color: var(--background-color);
+            color: var(--primary-color);
         }
-        .mermaid {
-            background-color: white;
-            padding: 1em;
-            margin: 2em 0;
-            text-align: center;
-            border: 1px solid #eee;
-            border-radius: 5px;
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--primary-color);
         }
+
         pre {
-            background-color: #f6f8fa;
+            background-color: var(--code-background);
             padding: 1em;
             border-radius: 5px;
             overflow-x: auto;
         }
+
         code {
-            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-            font-size: 0.9em;
-            background-color: rgba(27, 31, 35, 0.05);
+            font-family: Consolas, "Courier New", monospace;
+            background-color: var(--code-background);
             padding: 0.2em 0.4em;
             border-radius: 3px;
         }
+
         table {
             border-collapse: collapse;
             width: 100%;
             margin: 2em 0;
         }
+
         th, td {
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             padding: 8px;
             text-align: left;
         }
+
         th {
-            background-color: #f6f8fa;
+            background-color: var(--code-background);
         }
-        h1, h2, h3, h4, h5, h6 {
-            color: #2c3e50;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        h1 {
-            border-bottom: 1px solid #eaecef;
-            padding-bottom: 0.3rem;
-        }
-        .chapter {
-            margin-top: 3rem;
-            border-top: 1px solid #eee;
-            padding-top: 2rem;
-        }
+
         a {
-            color: #3498db;
+            color: var(--secondary-color);
             text-decoration: none;
         }
+
         a:hover {
             text-decoration: underline;
         }
+
         blockquote {
-            border-left: 4px solid #dfe2e5;
+            border-left: 4px solid var(--border-color);
             padding: 0 1em;
-            color: #6a737d;
+            color: var(--secondary-color);
             margin: 0 0 16px;
         }
+
         img {
             max-width: 100%;
             height: auto;
@@ -87,65 +104,48 @@ title: Agentic AI for Aviation Industry
     </style>
 </head>
 <body>
-   
     
-        <div class="cover">
-            <div class="cover-content">
-                <h1>Agentic AI for Aviation Industry: Transforming Digital Sales and Marketing</h1>
-                <div class="meta">
-                    <div class="series">Technical Architecture Series</div>
-                    <div class="author">By Tedd Yuan</div>
-                    <div class="date">April 2025</div>
-                </div>
-            </div>
-        </div>
-
-        <style>
-            .cover {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 100vh;
-                padding: 2rem;
-                text-align: center;
-                background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            }
-            
-            .cover-content {
-                max-width: 800px;
-            }
-            
-            .cover h1 {
-                font-size: 2.5rem;
-                line-height: 1.2;
-                margin-bottom: 1.5rem;
-                color: #2c3e50;
-            }
-            
-            .meta {
-                font-size: 1.2rem;
-                color: #7f8c8d;
-            }
-            
-            .meta div {
-                margin: 0.5rem 0;
-            }
-            
-            @media (max-width: 768px) {
-                .cover h1 {
-                    font-size: 1.8rem;
-                }
-                
-                .meta {
-                    font-size: 1rem;
-                }
-            }
-        </style>
-            
-            
-
-        <h2>Table of Contents</h2><ol><li><a href="#01_introduction.md">Introduction</a></li><li><a href="#02_technological_foundations.md">Technological Foundations</a></li><li><a href="#03_applications_in_aviation.md">Applications In Aviation</a></li><li><a href="#04_implementation_strategies.md">Implementation Strategies</a></li><li><a href="#05_challenges_and_ethics.md">Challenges And Ethics</a></li><li><a href="#06_future_trends.md">Future Trends</a></li></ol>
-<div id="01_introduction.md" class="chapter"><h1>Introduction</h1>
+    <h1>Transform Aviation Industry with Agentic AI Technology</h1>
+<h2>Revolutionizing Aviation with Agentic AI</h2>
+<h3>About This Book</h3>
+<p>This book delves into the transformative potential of Agentic AI technology in the aviation industry. It is designed for aviation professionals, AI enthusiasts, and business leaders who are keen to explore how AI can address challenges and unlock opportunities in aviation.</p>
+<h3>About the Author</h3>
+<p>Tedd Yuan is a visionary technology leader with a distinguished career spanning global markets, including Canada, Ireland, Singapore, and China. With a wealth of expertise in enterprise architecture, software development, and digital transformation, Tedd has consistently driven innovation and delivered strategic business outcomes. His leadership in managing cross-functional teams has been instrumental in shaping cutting-edge solutions that align with organizational goals.</p>
+<p>Currently serving as the Enterprise Architect - Data at Cathay Pacific, Tedd Yuan is at the forefront of designing and implementing enterprise-wide data strategies. He ensures that project solutions adhere to industry standards and regulatory requirements while crafting architectural blueprints and roadmaps for AI/ML and Data Analytics solutions on AWS. Tedd's pioneering work in integrating Generative AI and cloud technologies has empowered organizations to make data-driven decisions and achieve operational excellence.</p>
+<p>As the author of the acclaimed "Airline AI Transformation Series," Tedd explores the transformative potential of agentic AI in revolutionizing airline operations, workforce dynamics, and customer experiences. His deep industry insights and innovative approach position him as a thought leader in leveraging technology to drive business transformation. Tedd Yuan is a sought-after expert for roles that demand strategic vision, technical acumen, and a passion for innovation.</p>
+<h3>Table of Contents</h3>
+<ol>
+<li><a href="./chapters/01_introduction.md">Introduction: Transforming Aviation with Agentic AI</a></li>
+<li><a href="./chapters/02_technological_foundations.md">Technological Foundations: Enabling Agentic AI</a></li>
+<li><a href="./chapters/03_applications_in_aviation.md">Applications in Aviation: Real-World Use Cases</a></li>
+<li><a href="./chapters/04_implementation_strategies.md">Implementation Strategies: Integrating AI into Operations</a></li>
+<li><a href="./chapters/05_challenges_and_ethics.md">Challenges and Ethical Considerations</a></li>
+<li><a href="./chapters/06_future_trends.md">Future Trends: The Evolving Role of AI in Aviation</a></li>
+</ol>
+<h3>How to Use This Book</h3>
+<p>This book is structured to cater to a diverse audience:
+- <strong>Aviation Professionals</strong>: Focus on chapters 3, 4, and 5 for practical applications and strategies.
+- <strong>AI Enthusiasts</strong>: Chapters 2 and 6 provide insights into the technological and future aspects of AI.
+- <strong>Business Leaders</strong>: Chapters 1, 3, and 5 offer strategic perspectives on leveraging AI in aviation.</p>
+<h3>Contributing</h3>
+<p>This book is a collaborative effort aimed at advancing the understanding and application of AI in aviation. Contributions and feedback are welcome through pull requests and issues.</p>
+<h3>License</h3>
+<p>© 2025 All Rights Reserved</p>
+<section id="table-of-contents">
+<h2>Table of Contents</h2>
+<nav>
+<ul>
+<li><a href="#chapter-1">Chapter 1: 01 Introduction</a></li>
+<li><a href="#chapter-2">Chapter 2: 02 Technological Foundations</a></li>
+<li><a href="#chapter-3">Chapter 3: 03 Applications In Aviation</a></li>
+<li><a href="#chapter-4">Chapter 4: 04 Implementation Strategies</a></li>
+<li><a href="#chapter-5">Chapter 5: 05 Challenges And Ethics</a></li>
+<li><a href="#chapter-6">Chapter 6: 06 Future Trends</a></li>
+</ul>
+</nav>
+</section>
+<div id="chapter-1" class="chapter"><h1>Chapter 1: 01 Introduction</h1>
+<h1>Introduction</h1>
 <h2>Overview</h2>
 <p>The airline industry is undergoing a significant transformation driven by the integration of digital marketing and digital sales strategies. This book explores how these strategies are reshaping the way airlines operate, interact with customers, and drive business growth. By leveraging digital marketing and sales, airlines can enhance customer experiences, optimize sales processes, and achieve greater market penetration.</p>
 <h2>Objectives</h2>
@@ -170,7 +170,8 @@ title: Agentic AI for Aviation Industry
 </ol>
 <h2>Conclusion</h2>
 <p>Digital marketing and digital sales transformation are revolutionizing the airline industry. By understanding and implementing these strategies, airlines can achieve greater efficiency, improved customer satisfaction, and sustained competitive advantage.</p></div>
-<div id="02_technological_foundations.md" class="chapter"><h1>Digital Marketing Strategies</h1>
+<div id="chapter-2" class="chapter"><h1>Chapter 2: 02 Technological Foundations</h1>
+<h1>Digital Marketing Strategies</h1>
 <h2>Introduction</h2>
 <p>Digital marketing refers to the use of digital channels and technologies to promote products or services. In the context of the airline industry, digital marketing is used to enhance customer experiences, drive sales, and achieve greater market penetration. This chapter provides an overview of the key components of digital marketing and its applications in the airline industry.</p>
 <h2>Key Components of Digital Marketing</h2>
@@ -215,7 +216,8 @@ graph TD;
     E --> J[Customer Relationships];
     F --> K[Targeted Traffic];
 </div></div>
-<div id="03_applications_in_aviation.md" class="chapter"><h1>Applications of Digital Marketing in Aviation</h1>
+<div id="chapter-3" class="chapter"><h1>Chapter 3: 03 Applications In Aviation</h1>
+<h1>Applications of Digital Marketing in Aviation</h1>
 <h2>Introduction</h2>
 <p>Digital marketing has a wide range of applications in the aviation industry, transforming various aspects of airline operations. From customer engagement to sales and marketing strategies, digital marketing solutions are enhancing efficiency, customer satisfaction, and brand awareness. This chapter explores the key applications of digital marketing in aviation.</p>
 <h2>Customer Engagement and Experience</h2>
@@ -256,7 +258,8 @@ graph TD;
 
 <h2>Conclusion</h2>
 <p>Agentic AI has numerous applications in the aviation industry, transforming customer service, operations, logistics, and safety. By leveraging AI-driven solutions, airlines can achieve greater efficiency, improved customer satisfaction, and enhanced operational capabilities.</p></div>
-<div id="04_implementation_strategies.md" class="chapter"><h1>Implementation Strategies for Digital Marketing and Digital Sales</h1>
+<div id="chapter-4" class="chapter"><h1>Chapter 4: 04 Implementation Strategies</h1>
+<h1>Implementation Strategies for Digital Marketing and Digital Sales</h1>
 <h2>Introduction</h2>
 <p>Implementing digital marketing and digital sales strategies in the airline industry requires a strategic approach. This chapter outlines best practices and implementation strategies to successfully integrate these strategies and drive business growth.</p>
 <h2>Planning and Strategy</h2>
@@ -308,7 +311,8 @@ graph TD;
     E --> P[Training and Development];
     E --> Q[Continuous Improvement];
 </div></div>
-<div id="05_challenges_and_ethics.md" class="chapter"><h1>Challenges and Ethical Considerations in Digital Marketing and Digital Sales</h1>
+<div id="chapter-5" class="chapter"><h1>Chapter 5: 05 Challenges And Ethics</h1>
+<h1>Challenges and Ethical Considerations in Digital Marketing and Digital Sales</h1>
 <h2>Introduction</h2>
 <p>While digital marketing and digital sales strategies offer significant benefits to the airline industry, they also present various challenges and ethical considerations. This chapter explores the key obstacles and ethical dilemmas that airlines must address as they implement these strategies.</p>
 <h2>Challenges</h2>
@@ -359,7 +363,8 @@ graph TD;
     H --> P[Reskilling and Upskilling];
     I --> Q[Transparent Data Usage];
 </div></div>
-<div id="06_future_trends.md" class="chapter"><h1>Future Trends and Innovations in Digital Marketing and Digital Sales</h1>
+<div id="chapter-6" class="chapter"><h1>Chapter 6: 06 Future Trends</h1>
+<h1>Future Trends and Innovations in Digital Marketing and Digital Sales</h1>
 <h2>Introduction</h2>
 <p>The airline industry is on the cusp of significant advancements driven by digital marketing and digital sales transformation. This chapter explores the future trends and innovations that will shape the industry, enhancing customer engagement, brand awareness, and operational capabilities.</p>
 <h2>Emerging Technologies</h2>

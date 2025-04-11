@@ -15,16 +15,15 @@ As the author of the acclaimed "Airline AI Transformation Series," Tedd explores
 ### Table of Contents
 
 1. [Introduction: Transforming Aviation with Agentic AI](./chapters/01_introduction.md)
-2. [Modern Enterprise Data Architecture](./chapters/02_modern_enterprise_data_architecture.md)
-3. [Agentic AI Systems](./chapters/03_agentic_ai_systems.md)
-4. [Aviation Data Landscape and Challenges](./chapters/04_aviation_data_landscape_and_challenges.md)
-5. [Data Fabric and Data Mesh for Airlines](./chapters/05_data_fabric_and_data_mesh_for_airlines.md)
-6. [Autonomous AI Agents in Airline Operations](./chapters/06_autonomous_ai_agents_in_airline_operations.md)
-7. [Customer Experience Transformation with Agentic AI](./chapters/07_customer_experience_transformation_with_agentic_ai.md)
+2. [Technological Foundations: Enabling Agentic AI](./chapters/02_technological_foundations.md)
+3. [Applications in Aviation: Real-World Use Cases](./chapters/03_applications_in_aviation.md)
+4. [Implementation Strategies: Integrating AI into Operations](./chapters/04_implementation_strategies.md)
+5. [Challenges and Ethical Considerations](./chapters/05_challenges_and_ethics.md)
+6. [Future Trends: The Evolving Role of AI in Aviation](./chapters/06_future_trends.md)
 
 ### How to Use This Book
 This book is structured to cater to a diverse audience:
-- **Aviation Professionals**: Focus on chapters 4, 5, and 7 for practical applications and strategies.
+- **Aviation Professionals**: Focus on chapters 3, 4, and 5 for practical applications and strategies.
 - **AI Enthusiasts**: Chapters 2 and 6 provide insights into the technological and future aspects of AI.
 - **Business Leaders**: Chapters 1, 3, and 5 offer strategic perspectives on leveraging AI in aviation.
 

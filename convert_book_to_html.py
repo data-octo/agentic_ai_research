@@ -5,6 +5,7 @@ import markdown
 import traceback
 import sys
 import argparse
+import re
 
 def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
     """
@@ -39,6 +40,39 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
 
         all_content = []
 
+        # Initialize chapter_files list and populate it with chapter files
+        chapter_files = []
+
+        # Find all chapter files in both root and chapters/ directory if it exists
+        # Check root directory for chapter files
+        for filename in os.listdir(book_dir):
+            filepath = os.path.join(book_dir, filename)
+            if os.path.isfile(filepath) and filename.endswith('.md') and filename != "README.md" and (
+                    filename[0].isdigit() or (filename.startswith('chapter') and len(filename) > 7 and filename[7].isdigit())):
+                chapter_files.append((filepath, filename))
+
+        # Check if a chapters/ directory exists and process files there too
+        chapters_dir = os.path.join(book_dir, "chapters")
+        if os.path.exists(chapters_dir) and os.path.isdir(chapters_dir):
+            print(f"Found chapters/ directory, checking for markdown files...", file=sys.stderr)
+            for filename in os.listdir(chapters_dir):
+                filepath = os.path.join(chapters_dir, filename)
+                if os.path.isfile(filepath) and filename.endswith('.md') and filename != "README.md" and (
+                        filename[0].isdigit() or (filename.startswith('chapter') and len(filename) > 7 and filename[7].isdigit())):
+                    chapter_files.append((filepath, filename))
+
+        # Sort chapter files using a natural sort to handle numeric prefixes correctly
+        def natural_sort_key(file_info):
+            filepath, filename = file_info
+            # Extract numeric prefix if it exists
+            match = re.match(r'^(?:chapter)?(\d+)[\._]', filename)
+            if match:
+                return int(match.group(1)), filename
+            return 999, filename  # Files without numeric prefix go at the end
+
+        chapter_files.sort(key=natural_sort_key)
+        print(f"Found {len(chapter_files)} chapter files: {[f for _, f in chapter_files]}", file=sys.stderr)
+
         # Process README first
         readme_path = os.path.join(book_dir, "README.md")
         if os.path.exists(readme_path):
@@ -49,6 +83,9 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
             # Process mermaid diagrams
             readme_content = process_mermaid(readme_content)
 
+            # Remove any existing TOC from README content
+            readme_content = re.sub(r'(?<=\n)\s*\*\s+.*\n', '', readme_content)
+
             # Convert markdown to HTML
             readme_html = markdown.markdown(
                 readme_content,
@@ -57,40 +94,54 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
             all_content.append(readme_html)
             print("✓ Processed README.md", file=sys.stderr)
 
-        # Find all numbered chapter files
-        chapter_files = []
-        for filename in os.listdir(book_dir):
-            if filename.endswith('.md') and filename != "README.md" and (filename[0].isdigit() or (filename.startswith('chapter') and len(filename) > 7 and filename[7].isdigit())):
-                chapter_files.append(filename)
+        # Add author information
+        author_info = """
+        <section id='about-author'>
+            <h2>About the Author</h2>
+            <p>Tedd Yuan is a visionary technology leader with a distinguished career spanning global markets, including Canada, Ireland, Singapore, and China. With a wealth of expertise in enterprise architecture, software development, and digital transformation, Tedd has consistently driven innovation and delivered strategic business outcomes. His leadership in managing cross-functional teams has been instrumental in shaping cutting-edge solutions that align with organizational goals.</p>
+            <p>Currently serving as the Enterprise Architect - Data at Cathay Pacific, Tedd Yuan is at the forefront of designing and implementing enterprise-wide data strategies. He ensures that project solutions adhere to industry standards and regulatory requirements while crafting architectural blueprints and roadmaps for AI/ML and Data Analytics solutions on AWS. Tedd's pioneering work in integrating Generative AI and cloud technologies has empowered organizations to make data-driven decisions and achieve operational excellence.</p>
+            <p>As the author of the acclaimed "Airline AI Transformation Series," Tedd explores the transformative potential of agentic AI in revolutionizing airline operations, workforce dynamics, and customer experiences. His deep industry insights and innovative approach position him as a thought leader in leveraging technology to drive business transformation. Tedd Yuan is a sought-after expert for roles that demand strategic vision, technical acumen, and a passion for innovation.</p>
+        </section>
+        """
+        # all_content.append(author_info)
 
-        chapter_files.sort()  # Sort by filename
-        print(f"Found {len(chapter_files)} chapter files: {chapter_files}", file=sys.stderr)
+        # Generate Table of Contents (TOC) with two levels and proper chapter titles and links
+        toc_items = []
+        for idx, (filepath, filename) in enumerate(chapter_files, start=1):
+            chapter_title = filename.split('.')[0].replace('_', ' ').title()
+            chapter_id = filename.split('.')[0]  # Use filename without extension as ID
+            toc_items.append(f'<li><a href="#chapter-{idx}">Chapter {idx}: {chapter_title}</a></li>')
+        toc_content = '\n'.join(toc_items)
 
-        # Simple table of contents
-        toc_html = "<h2>Table of Contents</h2><ol>"
-        for filename in chapter_files:
-            chapter_name = filename.replace('.md', '').replace('_', ' ').title()
-            # Clean up chapter names by removing numeric prefixes
-            parts = chapter_name.split(' ')
-            if parts[0].replace('.', '').isdigit():
-                chapter_name = ' '.join(parts[1:])
-            toc_html += f'<li><a href="#{filename}">{chapter_name}</a></li>'
-        toc_html += "</ol>"
-        all_content.append(toc_html)
+        # Append the TOC after the README content with a proper heading and detailed format
+        if readme_path:
+            detailed_toc = f'''<section id="table-of-contents">
+<h2>Table of Contents</h2>
+<nav>
+<ul>
+{toc_content}
+</ul>
+</nav>
+</section>'''
+            all_content.append(detailed_toc)
 
-        # Process each chapter
-        for filename in chapter_files:
-            file_path = os.path.join(book_dir, filename)
+        # Ensure chapter IDs and titles are updated with 'Chapter' and chapter number
+        for idx, (filepath, filename) in enumerate(chapter_files, start=1):
             print(f"Processing {filename}...", file=sys.stderr)
 
-            with open(file_path, 'r', encoding='utf-8') as f:
+            with open(filepath, 'r', encoding='utf-8') as f:
                 chapter_content = f.read()
+
+            # Add 'Chapter' and chapter number to the title if not present
+            if not chapter_content.startswith(f'# Chapter {idx}'):
+                chapter_content = f'# Chapter {idx}: {filename.split(".")[0].replace("_", " ").title()}\n\n' + chapter_content
 
             # Process mermaid diagrams
             chapter_content = process_mermaid(chapter_content)
 
             # Convert markdown to HTML
-            chapter_html = f'<div id="{filename}" class="chapter">'
+            chapter_id = f'chapter-{idx}'
+            chapter_html = f'<div id="{chapter_id}" class="chapter">'
             chapter_html += markdown.markdown(
                 chapter_content,
                 extensions=['extra', 'tables', 'fenced_code']
@@ -99,33 +150,15 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
             all_content.append(chapter_html)
             print(f"✓ Processed {filename}", file=sys.stderr)
 
-        # Combine all content
+        # Only include the main content
         full_content = "\n".join(all_content)
 
-        # Add custom HTML structure at the beginning of the output
-        custom_html = f"""
-        <div class="cover">
-            <h1>Agentic AI for Aviation Industry: Transforming IT Departments with Autonomous AI Agents and Digital Workforce</h1>
-            <div class="subtitle">Transforming IT Departments with Autonomous AI Agents and Digital Workforce</div>
-            <div class="author">Technical Architecture Series</div>
-            <div class="author">Tedd Yuan</div>
-            <div class="date">April 2025</div>
-        </div>
-        <div class="toc">
-            <h1>Table of Contents</h1>
-            <ul>
-                <li style="margin-left: 0em"><a href="#chapter-1-chapter-1:-introduction-to-agentic-ai-in-aviation">Chapter 1: Introduction to Agentic AI in Aviation</a></li>
-                <!-- Add more TOC entries as needed -->
-            </ul>
-        </div>
-        """
-        full_content = custom_html + full_content
-
-        # Create final HTML
+        # Create final HTML with TOC
         final_html = HTML_TEMPLATE.format(
-            title=book_title,
-            version=version,
-            content=full_content
+            title=book_title,  # Title for the <title> tag without version info
+            version=version,   # Include version info in the header
+            toc=toc_content,   # Table of Contents
+            content=full_content  # Main content only
         )
 
         # Write to file
@@ -161,106 +194,9 @@ def process_mermaid(content):
     
     return '\n'.join(processed_lines)
 
-# HTML template with enhanced styling
-HTML_TEMPLATE = """
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title} - {version}</title>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
-    <style>
-        body {{
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-            color: #2c3e50;
-        }}
-        .mermaid {{
-            background-color: white;
-            padding: 1em;
-            margin: 2em 0;
-            text-align: center;
-            border: 1px solid #eee;
-            border-radius: 5px;
-        }}
-        pre {{
-            background-color: #f6f8fa;
-            padding: 1em;
-            border-radius: 5px;
-            overflow-x: auto;
-        }}
-        code {{
-            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-            font-size: 0.9em;
-            background-color: rgba(27, 31, 35, 0.05);
-            padding: 0.2em 0.4em;
-            border-radius: 3px;
-        }}
-        table {{
-            border-collapse: collapse;
-            width: 100%;
-            margin: 2em 0;
-        }}
-        th, td {{
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }}
-        th {{
-            background-color: #f6f8fa;
-        }}
-        h1, h2, h3, h4, h5, h6 {{
-            color: #2c3e50;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-        }}
-        h1 {{
-            border-bottom: 1px solid #eaecef;
-            padding-bottom: 0.3rem;
-        }}
-        .chapter {{
-            margin-top: 3rem;
-            border-top: 1px solid #eee;
-            padding-top: 2rem;
-        }}
-        a {{
-            color: #3498db;
-            text-decoration: none;
-        }}
-        a:hover {{
-            text-decoration: underline;
-        }}
-        blockquote {{
-            border-left: 4px solid #dfe2e5;
-            padding: 0 1em;
-            color: #6a737d;
-            margin: 0 0 16px;
-        }}
-        img {{
-            max-width: 100%;
-            height: auto;
-        }}
-    </style>
-</head>
-<body>
-    <h1>{title} - {version}</h1>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {{
-            mermaid.initialize({{
-                startOnLoad: true,
-                theme: 'default',
-                securityLevel: 'loose'
-            }});
-        }});
-    </script>
-    {content}
-</body>
-</html>
-"""
+# Load the HTML template from an external file
+with open(os.path.join(os.path.dirname(__file__), 'templates', 'html_template.html'), 'r', encoding='utf-8') as template_file:
+    HTML_TEMPLATE = template_file.read()
 
 def main():
     # Parse command line arguments
