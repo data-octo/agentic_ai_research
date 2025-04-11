@@ -12,7 +12,8 @@ The aviation industry generates significant data, with commercial aircraft produ
 1. **agentic_ai_transformation_airline** - Transform Aviation Industry with Agentic AI 
 2. **agentic_ai_transformation_airline** - Agentic AI for Aviation Industry with Digital Workforce and Autonomous AI Agents
 3. **agentic_ai_modern_data_architecture** - Agentic AI with Modern Enterprise Data Architecture for Airline Company
-4. **airline_enterprise_data_architecture_transform** - Enterprise Data Architecture for Airline Company
+4. **airline_enterprise_data_architecture_transform** - Transofrm Enterprise Data Architecture for Airline Company for Agentic AI
+4. **airline_enterprise_data_architecture_transform** - Transform Airline Digital Sales and Marketing with Agentic AI
 
 ## Proposed Book Series Structure
 
