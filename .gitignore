@@ -1,5 +1,9 @@
 # Git ignore file for books repository
 
+# Ignore output directory
+output/
+docs/vendor
+
 # Ignore any directory starting with cx_
 cx_*/
 
