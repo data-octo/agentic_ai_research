@@ -105,18 +105,37 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
         """
         # all_content.append(author_info)
 
-        # Generate Table of Contents (TOC) with two levels and proper chapter titles and links
+        # Generate Table of Contents (TOC) with consistent numbering and links
         toc_items = []
         for idx, (filepath, filename) in enumerate(chapter_files, start=1):
             chapter_title = filename.split('.')[0].replace('_', ' ').title()
-            chapter_id = filename.split('.')[0]  # Use filename without extension as ID
-            toc_items.append(f'<li><a href="#chapter-{idx}">Chapter {idx}: {chapter_title}</a></li>')
+            chapter_title = re.sub(r'^\d+\s+', '', chapter_title)  # Remove leading numbers from title
+            chapter_id = f'chapter-{idx}'  # Use chapter index as ID
+
+            # Add subsections if applicable
+            subsections = []
+            with open(filepath, 'r', encoding='utf-8') as f:
+                subsection_counter = 1
+                for line in f:
+                    if line.startswith('## '):
+                        subsection_title = line[3:].strip()
+                        subsection_number = f'{idx}.{subsection_counter}'
+                        subsection_id = f'{chapter_id}-{subsection_title.lower().replace(" ", "-")}'
+                        subsections.append(f'<li><a href="#{subsection_id}">{subsection_number} {subsection_title}</a></li>')
+                        subsection_counter += 1
+
+            if subsections:
+                subsections_html = '\n'.join(subsections)
+                toc_items.append(f'<li><a href="#{chapter_id}">Chapter {idx}: {chapter_title}</a><ul>{subsections_html}</ul></li>')
+            else:
+                toc_items.append(f'<li><a href="#{chapter_id}">Chapter {idx}: {chapter_title}</a></li>')
+
         toc_content = '\n'.join(toc_items)
 
         # Append the TOC after the README content with a proper heading and detailed format
         if readme_path:
             detailed_toc = f'''<section id="table-of-contents">
-<h2>Table of Contents</h2>
+<h1>Table of Contents</h1>
 <nav>
 <ul>
 {toc_content}
@@ -125,16 +144,18 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
 </section>'''
             all_content.append(detailed_toc)
 
-        # Ensure chapter IDs and titles are updated with 'Chapter' and chapter number
+        # Ensure chapter IDs and titles are updated with proper numbering and add two-level numbering inside chapters
         for idx, (filepath, filename) in enumerate(chapter_files, start=1):
             print(f"Processing {filename}...", file=sys.stderr)
 
             with open(filepath, 'r', encoding='utf-8') as f:
                 chapter_content = f.read()
 
-            # Add 'Chapter' and chapter number to the title if not present
+            # Add 'Chapter' and chapter number to the title if not present, and remove duplicate numbers
+            chapter_title = filename.split('.')[0].replace('_', ' ').title()
+            chapter_title = re.sub(r'^\d+\s+', '', chapter_title)  # Remove leading numbers from title
             if not chapter_content.startswith(f'# Chapter {idx}'):
-                chapter_content = f'# Chapter {idx}: {filename.split(".")[0].replace("_", " ").title()}\n\n' + chapter_content
+                chapter_content = f'# Chapter {idx}: {chapter_title}\n\n' + chapter_content
 
             # Process mermaid diagrams
             chapter_content = process_mermaid(chapter_content)
@@ -142,10 +163,31 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
             # Convert markdown to HTML
             chapter_id = f'chapter-{idx}'
             chapter_html = f'<div id="{chapter_id}" class="chapter">'
+
+            # Add two-level numbering for subsections
+            subsection_counter = 1
+            lines = chapter_content.splitlines()
+            for i, line in enumerate(lines):
+                if line.startswith('## '):
+                    subsection_title = line[3:].strip()
+                    subsection_number = f'{idx}.{subsection_counter}'
+                    lines[i] = f'## {subsection_number} {subsection_title}'
+                    subsection_counter += 1
+
+            chapter_content = '\n'.join(lines)
+
             chapter_html += markdown.markdown(
                 chapter_content,
                 extensions=['extra', 'tables', 'fenced_code']
             )
+
+            # Add subsection IDs for proper linking
+            for line in chapter_content.splitlines():
+                if line.startswith('## '):
+                    subsection_title = line.split(' ', 2)[2].strip()  # Extract title after numbering
+                    subsection_id = f'{chapter_id}-{subsection_title.lower().replace(" ", "-")}'
+                    chapter_html = chapter_html.replace(f'<h2>{subsection_title}</h2>', f'<h2 id="{subsection_id}">{subsection_title}</h2>')
+
             chapter_html += '</div>'
             all_content.append(chapter_html)
             print(f"✓ Processed {filename}", file=sys.stderr)
