@@ -84,7 +84,7 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
             readme_content = process_mermaid(readme_content)
 
             # Remove any existing TOC from README content
-            readme_content = re.sub(r'(?<=\n)\s*\*\s+.*\n', '', readme_content)
+            readme_content = re.sub(r'(?s)^\s*#\s*Table of Contents.*?(?=\n#|\Z)', '', readme_content, flags=re.IGNORECASE)
 
             # Convert markdown to HTML
             readme_html = markdown.markdown(
@@ -120,7 +120,7 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
                     if line.startswith('## '):
                         subsection_title = line[3:].strip()
                         subsection_number = f'{idx}.{subsection_counter}'
-                        subsection_id = f'{chapter_id}-{subsection_title.lower().replace(" ", "-")}'
+                        subsection_id = f'{chapter_id}-{subsection_number.replace(".", "-")}'  # Use subsection number for ID
                         subsections.append(f'<li><a href="#{subsection_id}">{subsection_number} {subsection_title}</a></li>')
                         subsection_counter += 1
 
@@ -171,7 +171,8 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
                 if line.startswith('## '):
                     subsection_title = line[3:].strip()
                     subsection_number = f'{idx}.{subsection_counter}'
-                    lines[i] = f'## {subsection_number} {subsection_title}'
+                    subsection_id = f'{chapter_id}-{subsection_number.replace(".", "-")}'  # Use subsection number for ID
+                    lines[i] = f'## {subsection_number} {subsection_title} {{#{subsection_id}}}'
                     subsection_counter += 1
 
             chapter_content = '\n'.join(lines)
@@ -180,13 +181,6 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
                 chapter_content,
                 extensions=['extra', 'tables', 'fenced_code']
             )
-
-            # Add subsection IDs for proper linking
-            for line in chapter_content.splitlines():
-                if line.startswith('## '):
-                    subsection_title = line.split(' ', 2)[2].strip()  # Extract title after numbering
-                    subsection_id = f'{chapter_id}-{subsection_title.lower().replace(" ", "-")}'
-                    chapter_html = chapter_html.replace(f'<h2>{subsection_title}</h2>', f'<h2 id="{subsection_id}">{subsection_title}</h2>')
 
             chapter_html += '</div>'
             all_content.append(chapter_html)
