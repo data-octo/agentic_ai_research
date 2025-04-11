@@ -9,12 +9,12 @@ import argparse
 def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
     """
     Convert a book directory containing Markdown files to a single HTML file.
-    
+
     Parameters:
     - book_dir: Directory containing the Markdown files of the book
     - output_dir: Directory to save the output HTML file (defaults to "output" in the parent directory)
     - version: Version string to include in the HTML title
-    
+
     Returns:
     - Path to the generated HTML file
     """
@@ -22,33 +22,33 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
         # Extract book title from directory name
         book_name = os.path.basename(book_dir)
         book_title = book_name.replace('_', ' ').title()
-        
+
         # Set default output directory if not provided
         if output_dir is None:
             output_dir = os.path.join(os.path.dirname(os.path.abspath(book_dir)), "output")
-        
+
         # Create output filename from book directory name
         output_file = os.path.join(output_dir, f"{book_name}_{version.replace('.', '_')}.html")
-        
+
         print(f"Starting conversion of '{book_title}' to HTML...", file=sys.stderr)
         print(f"Book directory: {book_dir}", file=sys.stderr)
         print(f"Output file: {output_file}", file=sys.stderr)
-        
+
         # Ensure output directory exists
         os.makedirs(output_dir, exist_ok=True)
-        
+
         all_content = []
-        
+
         # Process README first
         readme_path = os.path.join(book_dir, "README.md")
         if os.path.exists(readme_path):
             print(f"Reading README.md...", file=sys.stderr)
             with open(readme_path, 'r', encoding='utf-8') as f:
                 readme_content = f.read()
-            
+
             # Process mermaid diagrams
             readme_content = process_mermaid(readme_content)
-            
+
             # Convert markdown to HTML
             readme_html = markdown.markdown(
                 readme_content,
@@ -56,16 +56,16 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
             )
             all_content.append(readme_html)
             print("✓ Processed README.md", file=sys.stderr)
-        
+
         # Find all numbered chapter files
         chapter_files = []
         for filename in os.listdir(book_dir):
             if filename.endswith('.md') and filename != "README.md" and (filename[0].isdigit() or (filename.startswith('chapter') and len(filename) > 7 and filename[7].isdigit())):
                 chapter_files.append(filename)
-        
+
         chapter_files.sort()  # Sort by filename
         print(f"Found {len(chapter_files)} chapter files: {chapter_files}", file=sys.stderr)
-        
+
         # Simple table of contents
         toc_html = "<h2>Table of Contents</h2><ol>"
         for filename in chapter_files:
@@ -77,18 +77,18 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
             toc_html += f'<li><a href="#{filename}">{chapter_name}</a></li>'
         toc_html += "</ol>"
         all_content.append(toc_html)
-        
+
         # Process each chapter
         for filename in chapter_files:
             file_path = os.path.join(book_dir, filename)
             print(f"Processing {filename}...", file=sys.stderr)
-            
+
             with open(file_path, 'r', encoding='utf-8') as f:
                 chapter_content = f.read()
-            
+
             # Process mermaid diagrams
             chapter_content = process_mermaid(chapter_content)
-            
+
             # Convert markdown to HTML
             chapter_html = f'<div id="{filename}" class="chapter">'
             chapter_html += markdown.markdown(
@@ -98,25 +98,44 @@ def convert_book_to_html(book_dir, output_dir=None, version="v1.0"):
             chapter_html += '</div>'
             all_content.append(chapter_html)
             print(f"✓ Processed {filename}", file=sys.stderr)
-        
+
         # Combine all content
         full_content = "\n".join(all_content)
-        
+
+        # Add custom HTML structure at the beginning of the output
+        custom_html = f"""
+        <div class="cover">
+            <h1>Agentic AI for Aviation Industry: Transforming IT Departments with Autonomous AI Agents and Digital Workforce</h1>
+            <div class="subtitle">Transforming IT Departments with Autonomous AI Agents and Digital Workforce</div>
+            <div class="author">Technical Architecture Series</div>
+            <div class="author">Tedd Yuan</div>
+            <div class="date">April 2025</div>
+        </div>
+        <div class="toc">
+            <h1>Table of Contents</h1>
+            <ul>
+                <li style="margin-left: 0em"><a href="#chapter-1-chapter-1:-introduction-to-agentic-ai-in-aviation">Chapter 1: Introduction to Agentic AI in Aviation</a></li>
+                <!-- Add more TOC entries as needed -->
+            </ul>
+        </div>
+        """
+        full_content = custom_html + full_content
+
         # Create final HTML
         final_html = HTML_TEMPLATE.format(
             title=book_title,
             version=version,
             content=full_content
         )
-        
+
         # Write to file
         print(f"Writing HTML output to {output_file}...", file=sys.stderr)
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(final_html)
-        
+
         print(f"\nSUCCESS! HTML book generated at: {output_file}", file=sys.stderr)
         return output_file
-        
+
     except Exception as e:
         print(f"ERROR: {str(e)}", file=sys.stderr)
         print(traceback.format_exc(), file=sys.stderr)
