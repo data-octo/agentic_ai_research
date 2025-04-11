@@ -28,19 +28,22 @@
         }});
     </script>
     <style>
+        /* Updated book style for best user experience and readability */
         :root {{
-            --primary-color: #333;
-            --secondary-color: #666;
-            --background-color: #ffffff;
-            --code-background: #f5f5f5;
-            --border-color: #ddd;
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --background-color: #fdfdfd;
+            --code-background: #f8f9fa;
+            --border-color: #dcdcdc;
+            --highlight-color: #e74c3c;
+            --link-color: #2980b9;
         }}
 
         body {{
-            font-family: "Times New Roman", Times, serif;
-            line-height: 1.6;
-            font-size: 16px;
-            max-width: 1200px;
+            font-family: "Georgia", serif;
+            line-height: 1.8;
+            font-size: 18px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 2rem;
             background-color: var(--background-color);
@@ -49,6 +52,28 @@
 
         h1, h2, h3, h4, h5, h6 {{
             color: var(--primary-color);
+            font-family: "Merriweather", serif;
+        }}
+
+        h1 {{
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }}
+
+        h2 {{
+            font-size: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }}
+
+        h3 {{
+            font-size: 1.75rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }}
+
+        p {{
+            margin-bottom: 1.5rem;
         }}
 
         pre {{
@@ -56,6 +81,7 @@
             padding: 1em;
             border-radius: 5px;
             overflow-x: auto;
+            font-size: 0.9rem;
         }}
 
         code {{
@@ -73,16 +99,17 @@
 
         th, td {{
             border: 1px solid var(--border-color);
-            padding: 8px;
+            padding: 10px;
             text-align: left;
         }}
 
         th {{
             background-color: var(--code-background);
+            font-weight: bold;
         }}
 
         a {{
-            color: var(--secondary-color);
+            color: var(--link-color);
             text-decoration: none;
         }}
 
@@ -91,36 +118,85 @@
         }}
 
         blockquote {{
-            border-left: 4px solid var(--border-color);
+            border-left: 4px solid var(--highlight-color);
             padding: 0 1em;
             color: var(--secondary-color);
             margin: 0 0 16px;
+            font-style: italic;
         }}
 
         img {{
             max-width: 100%;
             height: auto;
+            margin: 1rem 0;
         }}
 
-        /* Further optimized book cover styles for a professional book-like appearance */
+        .chapter {{
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--code-background);
+        }}
+
+        .chapter h2 {{
+            color: var(--primary-color);
+        }}
+
+        .chapter p {{
+            line-height: 1.8;
+        }}
+
+        .table-of-contents {{
+            margin-bottom: 3rem;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--code-background);
+        }}
+
+        .table-of-contents h1 {{
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }}
+
+        .table-of-contents ul {{
+            list-style: none;
+            padding: 0;
+        }}
+
+        .table-of-contents li {{
+            margin-bottom: 0.5rem;
+        }}
+
+        .table-of-contents a {{
+            color: var(--link-color);
+            font-weight: bold;
+        }}
+
+        .table-of-contents a:hover {{
+            color: var(--highlight-color);
+        }}
+
+        /* Optimized book cover for readability */
         .book-cover {{
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background: linear-gradient(135deg, #f5f5f5, #e0e0e0); /* Subtle gradient for a book-like feel */
+            background: linear-gradient(135deg, #ffffff, #f0f0f0); /* Subtle gradient for readability */
             color: #333333;
             text-align: center;
             padding: 2rem;
-            border: 1px solid #cccccc;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }}
 
         .book-cover h1 {{
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            font-family: "Georgia", serif;
+            font-family: "Merriweather", serif;
             color: #2c3e50;
         }}
 
@@ -158,9 +234,8 @@
         <h1>{title}</h1>
         <h2>Airline Agentic AI Series</h2>
        
-        
         <p>By Tedd Yuan</p>
-        <p class="date">May 2025</p>
+        <p class="date">April 2025</p>
     </div>
     {content}
 </body>
