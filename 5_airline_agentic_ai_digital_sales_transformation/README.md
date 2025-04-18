@@ -30,7 +30,8 @@ As the author of the acclaimed "Airline AI Transformation Series," Tedd explores
 3. [Applications in Aviation: Real-World Use Cases](./chapters/03_applications_in_aviation.md)
 4. [Implementation Strategies: Integrating AI into Operations](./chapters/04_implementation_strategies.md)
 5. [Challenges and Ethical Considerations](./chapters/05_challenges_and_ethics.md)
-6. [Future Trends: The Evolving Role of AI in Aviation](./chapters/06_future_trends.md)
+6. [Use Case Study](./chapters/06_use_case_study.md)
+7. [Future Trends: The Evolving Role of AI in Aviation](./chapters/07_future_trends.md)
 
 ### How to Use This Book
 This book is structured to cater to a diverse audience:
